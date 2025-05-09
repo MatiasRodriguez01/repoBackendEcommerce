@@ -14,7 +14,7 @@ import org.example.ecommercebackend.entities.Base;
 @Setter
 @Builder
 public class DetalleProducto extends Base {
-
+    
     @ManyToOne()
     @JoinColumn(name = "fk_talle")
     private Talles talledetalleProductos;
