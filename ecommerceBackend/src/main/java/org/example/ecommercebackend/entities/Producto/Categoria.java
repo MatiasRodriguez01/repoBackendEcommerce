@@ -31,6 +31,7 @@ public class Categoria extends Base {
     @JsonManagedReference
     private List<Producto> productos = new ArrayList<>();
 
+
     @ManyToOne
     @JoinColumn(name = "categoria_padre_id")
     private Categoria categoriaPadre;

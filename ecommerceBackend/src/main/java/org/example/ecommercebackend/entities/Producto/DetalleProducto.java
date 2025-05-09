@@ -17,11 +17,7 @@ public class DetalleProducto extends Base {
 
     @ManyToOne()
     @JoinColumn(name = "fk_talle")
-    @JsonBackReference
     private Talles talledetalleProductos;
-
-    @Column(name = "stock")
-    private Number stock;
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
@@ -32,6 +28,9 @@ public class DetalleProducto extends Base {
     @JoinColumn(name = "fk_precio")
     private Precio precio;
 
+    @Column(name = "stock")
+    private Integer stock;
+
     @Column(name = "color")
     private String color;
 
@@ -40,5 +39,5 @@ public class DetalleProducto extends Base {
 
     @OneToOne()
     @JoinColumn(name = "fk_imagen_producto")
-    private ImagenProducto ImagenProducto;
+    private ImagenProducto imagenProducto;
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "producto")
+@Table(name = "productos")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -26,19 +26,27 @@ public class Producto extends Base {
     @Column(name = "nombre")
     private String nombre;
 
+
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
     @JsonBackReference
     private Categoria categoria;
 
-    @Column(name = "tipo_producto")
-    private TipoProducto tipoProducto;
-
     @Column(name = "sexo")
     private String sexo;
+
+
+    @Column(name = "tipo_producto")
+    private TipoProducto tipoProducto;
 
     @Builder.Default
     @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE, orphanRemoval = true)
     @JsonManagedReference
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
+
+    public void addDetalleProducto(DetalleProducto detalleProducto) {
+        detallesProductos.add(detalleProducto);
+        detalleProducto.setProducto(this);
+
+    }
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.ecommercebackend.entities.Producto.Descuento;
 
 import java.io.Serializable;
 @MappedSuperclass

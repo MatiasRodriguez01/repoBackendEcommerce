@@ -5,16 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 import org.example.ecommercebackend.entities.Base;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "descuento_producto")
+@Table(name = "descuentos")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Descuento extends Base {
 
 
