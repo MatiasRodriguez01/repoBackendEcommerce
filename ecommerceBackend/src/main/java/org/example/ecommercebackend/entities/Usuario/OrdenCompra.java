@@ -19,7 +19,7 @@ public class OrdenCompra extends Base {
 
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST) //esto va a usuario direccion para tener la direccion desde donde se pidio?
     @JoinColumn(name = "fk_usuario_direccion")
     private UsuarioDireccion usuarioDireccion;
 
@@ -32,6 +32,6 @@ public class OrdenCompra extends Base {
     @Column(name = "fecha_compra")
     private Date fechaCompra;
 
-    @Column(name = "direccion_envio")
+    @Column(name = "direccion_envio") //aca iria la direccion de tipo direccion?
     private String direccionEnvio;
 }

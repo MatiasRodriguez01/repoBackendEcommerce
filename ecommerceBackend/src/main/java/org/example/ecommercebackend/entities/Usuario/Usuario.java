@@ -22,7 +22,7 @@ public class Usuario extends Base {
     private String contraseña;
 
     @Column(name = "rol")
-    private Rol rol;
+    private org.example.ecommercebackend.entities.Usuario.Rol rol;
 
     @Column(name = "email")
     private String email;

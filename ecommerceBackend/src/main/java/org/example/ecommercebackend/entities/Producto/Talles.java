@@ -1,5 +1,8 @@
 package org.example.ecommercebackend.entities.Producto;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.ecommercebackend.entities.Base;
@@ -28,4 +31,5 @@ public class Talles extends Base {
 //    public void addDetalleProducto(DetalleProducto detalleProducto) {
 //        detallesProductos.add(detalleProducto);
 //    }
+
 }

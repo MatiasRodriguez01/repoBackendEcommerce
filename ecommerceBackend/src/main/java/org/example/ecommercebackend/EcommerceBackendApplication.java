@@ -14,13 +14,13 @@ import java.text.SimpleDateFormat;
 @SpringBootApplication
 public class EcommerceBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EcommerceBackendApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(EcommerceBackendApplication.class, args);
         System.out.println("Servidor iniciando");
-	}
-//
+    }
+    //
     @Bean
-	@Transactional
+    @Transactional
     CommandLineRunner init (DetalleProductoRepository detalleProductoRepository,
                             ProductoRepository productoRepository,
                             CategoriaRepository categoriaRepository,
@@ -239,7 +239,7 @@ public class EcommerceBackendApplication {
             categoriaRepository.saveAndFlush(cate2);
 
 
-      };
-   }
+        };
+    }
 
- }
+}

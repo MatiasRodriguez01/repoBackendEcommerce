@@ -16,8 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsuarioDireccion extends Base {
+public class UsuarioDireccion extends Base { //ES NECESARIO USUARIODIRECCION SI YA TENEMOS USUARIO Y DIRECCIONES?
 
+    //PONER RELACION ONE TO ONE A USUARIO BIEN
     private Long idUsuario;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

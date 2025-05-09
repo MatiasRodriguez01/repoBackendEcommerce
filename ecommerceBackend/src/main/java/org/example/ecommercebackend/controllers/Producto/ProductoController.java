@@ -41,3 +41,4 @@ public class ProductoController extends BaseController<Producto, Long> {
         return productoService.sacarDetalleProducto(productoId, detalle);
     }
 }
+

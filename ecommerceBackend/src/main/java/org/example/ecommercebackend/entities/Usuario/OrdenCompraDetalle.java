@@ -15,11 +15,12 @@ import org.example.ecommercebackend.entities.Base;
 @Setter
 public class OrdenCompraDetalle extends Base {
 
+    //esta relacion es many to one y ver si hacer bidireccional o no y si no ver cual entidad sera propietaria (creo que esta es mejor que sea bidireccional)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_orden_compra")
-    private OrdenCompra ordenCompra;
+    private org.example.ecommercebackend.entities.Usuario.OrdenCompra ordenCompra;
 
-
+    //poner bien la relacion y ver bien cual relacion conviene que sea la propietaria
     private Long idProducto;
 
     @Column(name = "cantidad")

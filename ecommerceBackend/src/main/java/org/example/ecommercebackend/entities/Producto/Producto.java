@@ -1,5 +1,9 @@
 package org.example.ecommercebackend.entities.Producto;
 
+<<<<<<< HEAD
+=======
+import com.fasterxml.jackson.annotation.JsonBackReference;
+>>>>>>> 4aec04cf72a3a5ffaadc9a19f9d8ae41ff23ca2c
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,20 +29,26 @@ public class Producto extends Base {
     @Column(name = "nombre")
     private String nombre;
 
+
+    @ManyToOne()
+    @JoinColumn(name = "fk_categoria")
+    @JsonBackReference
+    private Categoria categoria;
+
     @Column(name = "sexo")
     private String sexo;
+
 
     @Column(name = "tipo_producto")
     private TipoProducto tipoProducto;
 
-    @ManyToOne()
-    @JoinColumn(name = "fk_categoria")
-    private Categoria categoria;
-
     @Builder.Default
     @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE, orphanRemoval = true)
     @JsonManagedReference
+<<<<<<< HEAD
     //@JoinColumn(name = "fk_destalles_productos")
+=======
+>>>>>>> 4aec04cf72a3a5ffaadc9a19f9d8ae41ff23ca2c
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
 
     public void addDetalleProducto(DetalleProducto detalleProducto) {
