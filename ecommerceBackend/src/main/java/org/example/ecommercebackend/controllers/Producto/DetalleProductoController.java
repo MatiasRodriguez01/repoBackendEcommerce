@@ -6,6 +6,7 @@ import org.example.ecommercebackend.services.Producto.DetalleProductoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/detalleProducto")
 public class DetalleProductoController extends BaseController<DetalleProducto, Long> {

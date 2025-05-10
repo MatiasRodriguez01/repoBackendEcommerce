@@ -17,7 +17,6 @@ import java.util.List;
 @Builder
 public class DetalleProducto extends Base {
 
-
     @Builder.Default
     @ManyToMany(mappedBy = "categoria", cascade = CascadeType.MERGE)
     @JoinTable(
