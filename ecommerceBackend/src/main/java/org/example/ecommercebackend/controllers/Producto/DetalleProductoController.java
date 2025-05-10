@@ -1,10 +1,7 @@
 package org.example.ecommercebackend.controllers.Producto;
 
 import org.example.ecommercebackend.controllers.BaseController;
-import org.example.ecommercebackend.entities.Producto.DetalleProducto;
-import org.example.ecommercebackend.entities.Producto.ImagenProducto;
-import org.example.ecommercebackend.entities.Producto.Precio;
-import org.example.ecommercebackend.entities.Producto.Producto;
+import org.example.ecommercebackend.entities.Producto.*;
 import org.example.ecommercebackend.services.Producto.DetalleProductoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +17,26 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
         this.detalleProductoService = detalleProductoService;
     }
 
+    // ======================= TALLESDETALLEPRODUCTOS ==================================
+    @PutMapping("/{detalleID}/agregarTalle")
+    public ResponseEntity<?> agregarTalle(@PathVariable Long detalleId, @RequestBody Talles talle) {
+        try {
+            DetalleProducto detalleActualizado = detalleProductoService.agregarTalles(detalleId, talle);
+            return ResponseEntity.ok(detalleActualizado);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{detalleID}/eliminarTalle")
+    public ResponseEntity<?> sacarTalle(@PathVariable Long detalleId, @RequestBody Talles talle) {
+        try {
+            DetalleProducto detalleActualizado = detalleProductoService.sacarTalles(detalleId, talle);
+            return ResponseEntity.ok(detalleActualizado);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
     // ===================== PRODUCTO =====================
 
     @PutMapping("/{detalleId}/asociarProducto")

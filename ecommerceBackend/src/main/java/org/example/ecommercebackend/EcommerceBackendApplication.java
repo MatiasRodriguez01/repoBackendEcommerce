@@ -140,7 +140,8 @@ public class EcommerceBackendApplication {
                     color("rojo").
                     estado(true).
                     build();
-            detalle1.setTalledetalleProductos(talle1);
+            detalle1.getTallesDetalleProductos().add(talle1);
+            detalle1.getTallesDetalleProductos().add(talle3);
             detalle1.setPrecio(precio1);
             detalle1.setImagenProducto(imagen1);
             detalleProductoRepository.saveAndFlush(detalle1);
@@ -151,7 +152,8 @@ public class EcommerceBackendApplication {
                     estado(true).
                     imagenProducto(imagen3).
                     build();
-            detalle2.setTalledetalleProductos(talle2);
+            detalle2.getTallesDetalleProductos().add(talle2);
+            detalle2.getTallesDetalleProductos().add(talle4);
             detalle2.setPrecio(precio2);
             detalle2.setImagenProducto(imagen3);
             detalleProductoRepository.saveAndFlush(detalle2);
@@ -164,7 +166,8 @@ public class EcommerceBackendApplication {
                     color("rojo").
                     estado(true).
                     build();
-            detalle3.setTalledetalleProductos(talle3);
+            detalle3.getTallesDetalleProductos().add(talle1);
+            detalle3.getTallesDetalleProductos().add(talle3);
             detalle3.setPrecio(precio3);
             detalle3.setImagenProducto(imagen2);
             detalleProductoRepository.saveAndFlush(detalle3);
@@ -174,7 +177,8 @@ public class EcommerceBackendApplication {
                     color("azul").
                     estado(true).
                     build();
-            detalle4.setTalledetalleProductos(talle4);
+            detalle4.getTallesDetalleProductos().add(talle2);
+            detalle4.getTallesDetalleProductos().add(talle4);
             detalle4.setPrecio(precio4);
             detalle4.setImagenProducto(imagen4);
             detalleProductoRepository.saveAndFlush(detalle4);

@@ -1,10 +1,7 @@
 package org.example.ecommercebackend.services.Producto;
 
 import jakarta.transaction.Transactional;
-import org.example.ecommercebackend.entities.Producto.DetalleProducto;
-import org.example.ecommercebackend.entities.Producto.ImagenProducto;
-import org.example.ecommercebackend.entities.Producto.Precio;
-import org.example.ecommercebackend.entities.Producto.Producto;
+import org.example.ecommercebackend.entities.Producto.*;
 import org.example.ecommercebackend.repositories.Producto.DetalleProductoRepository;
 import org.example.ecommercebackend.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,33 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
         super(detalleProductoRepository);
     }
 
+    @Transactional
+    public DetalleProducto agregarTalles(Long detalleId, Talles newTalle) throws Exception {
+        try {
+            DetalleProducto detalle = detalleProductoRepository.findById(detalleId)
+                    .orElseThrow(() -> new Exception("DetalleProducto no encontrado con id: " + detalleId));
+
+
+            detalle.getTallesDetalleProductos().add(newTalle);
+            return detalleProductoRepository.save(detalle);
+        } catch (Exception ex) {
+            throw new Exception("Ocurrio un error en el servicio (agregarTalles): " + ex.getMessage());
+        }
+    }
+
+    @Transactional
+    public DetalleProducto sacarTalles(Long detalleId, Talles talleDelete) throws Exception {
+        try {
+            DetalleProducto detalle = detalleProductoRepository.findById(detalleId)
+                    .orElseThrow(() -> new Exception("DetalleProducto no encontrado con id: " + detalleId));
+
+
+            detalle.getTallesDetalleProductos().removeIf(talle -> talle.getId() == talleDelete.getId());
+            return detalleProductoRepository.save(detalle);
+        } catch (Exception ex) {
+            throw new Exception("Ocurrio un error en el servicio (sacarTalles): " + ex.getMessage());
+        }
+    }
 
     // METODOS PARA PRODUCTO
     // Metodo para asocial un producto
