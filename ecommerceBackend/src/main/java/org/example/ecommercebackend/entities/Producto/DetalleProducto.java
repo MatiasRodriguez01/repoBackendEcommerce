@@ -18,7 +18,7 @@ import java.util.List;
 public class DetalleProducto extends Base {
 
     @Builder.Default
-    @ManyToMany(mappedBy = "categoria", cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "fk_talle",
             joinColumns = @JoinColumn(name = "id_detalle"),
