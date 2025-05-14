@@ -1,5 +1,6 @@
 package org.example.ecommercebackend.entities.Producto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,7 +38,7 @@ public class DetalleProducto extends Base {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    @JsonManagedReference
+    @JsonBackReference("producto-detalle")
     private Producto producto;
 
     @OneToOne

@@ -7,6 +7,8 @@ import org.example.ecommercebackend.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
 
@@ -15,6 +17,16 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
 
     public DetalleProductoService(DetalleProductoRepository detalleProductoRepository) {
         super(detalleProductoRepository);
+    }
+
+    @Transactional
+    public List<DetalleProducto> buscarPorTalleYCategoria(String talle, String categoria) throws Exception {
+        try {
+            return detalleProductoRepository.buscarPorTalleYCategoria(talle, categoria);
+
+        } catch (Exception ex) {
+            throw new Exception("Ocurrio al ordenar por talle y categoria: " + ex.getMessage());
+        }
     }
 
     @Transactional

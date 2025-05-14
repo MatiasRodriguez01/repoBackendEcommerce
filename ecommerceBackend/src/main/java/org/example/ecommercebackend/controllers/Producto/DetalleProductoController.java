@@ -6,6 +6,8 @@ import org.example.ecommercebackend.services.Producto.DetalleProductoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/detalleProducto")
@@ -18,6 +20,17 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
         this.detalleProductoService = detalleProductoService;
     }
 
+    // ------------------------ Listar talle y categoria -------------------------------
+    @GetMapping(params = {"talle", "categoria"})
+    public ResponseEntity<?> listaPorTalleYCategoria(@RequestParam String talle, @RequestParam String categoria) throws Exception {
+
+        try {
+            List<DetalleProducto> lista = detalleProductoService.buscarPorTalleYCategoria(talle, categoria);
+            return ResponseEntity.ok(lista);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
     // ======================= TALLESDETALLEPRODUCTOS ==================================
     @PutMapping("/{detalleID}/agregarTalle")
     public ResponseEntity<?> agregarTalle(@PathVariable Long detalleId, @RequestBody Talles talle) {
