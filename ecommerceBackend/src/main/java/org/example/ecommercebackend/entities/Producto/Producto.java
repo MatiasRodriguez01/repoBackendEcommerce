@@ -29,7 +29,7 @@ public class Producto extends Base {
 
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
-    @JsonManagedReference
+    @JsonBackReference("categoria-producto")
     private Categoria categoria;
 
     @Column(name = "sexo")
@@ -40,7 +40,7 @@ public class Producto extends Base {
 
     @Builder.Default
     @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE, orphanRemoval = true)
-    @JsonBackReference
+    @JsonManagedReference("producto-detalle")
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
 
     public void addDetalleProducto(DetalleProducto detalleProducto) {
