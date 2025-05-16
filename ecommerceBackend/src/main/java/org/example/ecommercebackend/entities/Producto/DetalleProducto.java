@@ -1,5 +1,6 @@
 package org.example.ecommercebackend.entities.Producto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @Setter
 @Builder
 public class DetalleProducto extends Base {
+
 
     @Builder.Default
     @ManyToMany(cascade = CascadeType.MERGE)

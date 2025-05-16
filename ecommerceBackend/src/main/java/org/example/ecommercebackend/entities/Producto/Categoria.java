@@ -1,4 +1,5 @@
 package org.example.ecommercebackend.entities.Producto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public class Categoria extends Base {
 
     @Builder.Default
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.MERGE, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonBackReference
     private List<Producto> productos = new ArrayList<>();
 
     public void addProducto(Producto producto) {

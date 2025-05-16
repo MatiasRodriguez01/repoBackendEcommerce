@@ -202,6 +202,7 @@ public class EcommerceBackendApplication {
                     sexo("femenino").
                     build();
             producto1.addDetalleProducto(detalle3);
+            detalle3.setProducto(producto1);
             productoRepository.saveAndFlush(producto1);
 
             Producto producto2 = Producto.builder().
@@ -211,6 +212,7 @@ public class EcommerceBackendApplication {
                     build();
             producto2.setCategoria(cate1);
             producto2.addDetalleProducto(detalle1);
+            detalle1.setProducto(producto2);
             productoRepository.save(producto2);
 
             cate1.addProducto(producto1);
@@ -225,6 +227,7 @@ public class EcommerceBackendApplication {
                     build();
             producto3.setCategoria(cate2);
             producto3.addDetalleProducto(detalle2);
+            detalle2.setProducto(producto3);
             productoRepository.save(producto3);
 
 
@@ -235,6 +238,7 @@ public class EcommerceBackendApplication {
                     build();
             producto4.setCategoria(cate2);
             producto4.addDetalleProducto(detalle4);
+            detalle4.setProducto(producto4);
             productoRepository.save(producto4);
 
 
