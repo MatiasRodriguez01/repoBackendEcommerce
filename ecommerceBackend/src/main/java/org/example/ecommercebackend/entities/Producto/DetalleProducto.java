@@ -2,7 +2,9 @@ package org.example.ecommercebackend.entities.Producto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.jdi.BooleanType;
 import jakarta.persistence.*;
+import jdk.jfr.BooleanFlag;
 import lombok.*;
 import org.example.ecommercebackend.entities.Base;
 

@@ -20,6 +20,43 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
     }
 
     @Transactional
+    public List<DetalleProducto> ordernarPorTipoProducto(String tipo) throws Exception {
+        try {
+            String tipoUpper = tipo.toUpperCase();
+
+            switch (tipoUpper) {
+                case "ZAPATILLA":
+                    return detalleProductoRepository.ordernarPorTipoProducto(tipo);
+                case "ROPA":
+                    return detalleProductoRepository.ordernarPorTipoProducto(tipo);
+                default:
+                    throw new Exception("El criterio de orden no es válido: " + tipo);
+            }
+        } catch (Exception ex) {
+            throw new Exception("Ocurrio un error al orderar los detalle por tipo de producto: " + ex.getMessage());
+        }
+    }
+
+    @Transactional
+    public List<DetalleProducto> orderPorPrecio(String orden) throws Exception {
+        try {
+            String ordenLower = orden.toLowerCase();
+
+            switch (ordenLower) {
+                case "ascendiente":
+                    return detalleProductoRepository.ordenarPrecioAscendiente();
+                case "descendiente":
+                    return detalleProductoRepository.ordenarPrecioDescendiente();
+                default:
+                    throw new Exception("El criterio de orden no es válido: " + orden);
+            }
+        } catch (Exception ex) {
+            throw new Exception("Ocurrió un error al intentar ordenar los detalles por precio: " + ex.getMessage());
+        }
+    }
+
+
+    @Transactional
     public List<DetalleProducto> buscarPorTalleYCategoria(String talle, String categoria) throws Exception {
         try {
             return detalleProductoRepository.buscarPorTalleYCategoria(talle, categoria);

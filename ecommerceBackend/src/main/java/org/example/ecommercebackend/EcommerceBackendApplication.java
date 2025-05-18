@@ -18,7 +18,7 @@ public class EcommerceBackendApplication {
         SpringApplication.run(EcommerceBackendApplication.class, args);
         System.out.println("Servidor iniciando");
     }
-    //
+
 //    @Bean
 //    @Transactional
 //    CommandLineRunner init   (DetalleProductoRepository detalleProductoRepository,
@@ -164,7 +164,7 @@ public class EcommerceBackendApplication {
 //            DetalleProducto detalle3 = DetalleProducto.builder().
 //                    stock(6).
 //                    color("rojo").
-//                    estado(true).
+//                    estado(Boolean.TRUE).
 //                    build();
 //            detalle3.getTallesDetalleProductos().add(talle1);
 //            detalle3.getTallesDetalleProductos().add(talle3);
@@ -199,15 +199,15 @@ public class EcommerceBackendApplication {
 //            Producto producto1 = Producto.builder().
 //                    nombre("camiseta de futbol").
 //                    tipoProducto(TipoProducto.ROPA).
-//                    sexo("femenino").
+//                    seccion(Seccion.FEMENINO).
 //                    build();
 //            producto1.addDetalleProducto(detalle3);
 //            productoRepository.saveAndFlush(producto1);
 //
 //            Producto producto2 = Producto.builder().
-//                    nombre("zapatilla depo  rtivas").
+//                    nombre("zapatilla deportivas").
 //                    tipoProducto(TipoProducto.ZAPATILLA).
-//                    sexo("femenino").
+//                    seccion(Seccion.FEMENINO).
 //                    build();
 //            producto2.setCategoria(cate1);
 //            producto2.addDetalleProducto(detalle1);
@@ -221,7 +221,7 @@ public class EcommerceBackendApplication {
 //            Producto producto3 = Producto.builder().
 //                    nombre("zapatilla urbanas").
 //                    tipoProducto(TipoProducto.ZAPATILLA).
-//                    sexo("femenino").
+//                    seccion(Seccion.FEMENINO).
 //                    build();
 //            producto3.setCategoria(cate2);
 //            producto3.addDetalleProducto(detalle2);
@@ -230,8 +230,8 @@ public class EcommerceBackendApplication {
 //
 //            Producto producto4 = Producto.builder().
 //                    nombre("remera urbana").
-//                    tipoProducto(TipoProducto.ZAPATILLA).
-//                    sexo("masculino").
+//                    tipoProducto(TipoProducto.ROPA).
+//                    seccion(Seccion.MASCULINO).
 //                    build();
 //            producto4.setCategoria(cate2);
 //            producto4.addDetalleProducto(detalle4);

@@ -20,6 +20,32 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
         this.detalleProductoService = detalleProductoService;
     }
 
+    // ------------------------- Ordenar por tipo de producto -----------------------------------
+    // en el controller cuando hagamos la peticio deberia ingresar zapatilla o Ropa
+    // de lo contrario tira una Exception
+    @GetMapping(params = {"producto"})
+    public ResponseEntity<?> ordenarPorTipoProducto(@RequestParam String tipo){
+        try {
+            List<DetalleProducto> lista = detalleProductoService.ordernarPorTipoProducto(tipo);
+            return ResponseEntity.ok(lista);
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    // ------------------------- Ordenar por precio Ascendente o Descendente --------------------------
+    // en el controller cuando hagamos la peticion debera ingresar Ascenente o Descendente segun quiera el orden
+    // de lo contrario tirara una Exception
+    @GetMapping(params = {"orden"})
+    public ResponseEntity<?> ordenarPorPrecio(@RequestParam String orden) throws Exception {
+        try {
+            List<DetalleProducto> lista = detalleProductoService.orderPorPrecio(orden);
+            return ResponseEntity.ok(lista);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     // ------------------------ Listar talle y categoria -------------------------------
     @GetMapping(params = {"talle", "categoria"})
     public ResponseEntity<?> listaPorTalleYCategoria(@RequestParam String talle, @RequestParam String categoria) throws Exception {

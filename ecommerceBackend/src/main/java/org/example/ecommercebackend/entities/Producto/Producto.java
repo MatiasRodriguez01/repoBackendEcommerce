@@ -30,12 +30,14 @@ public class Producto extends Base {
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
     @JsonBackReference("categoria-producto")
-    private Categoria categoria;
+    private Categoria categoria;            
 
-    @Column(name = "sexo")
-    private String sexo;
+    @Column(name = "seccion")
+    @Enumerated(EnumType.STRING)
+    private Seccion seccion;
 
     @Column(name = "tipo_producto")
+    @Enumerated(EnumType.STRING)
     private TipoProducto tipoProducto;
 
     @Builder.Default
