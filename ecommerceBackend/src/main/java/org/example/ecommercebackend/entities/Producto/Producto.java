@@ -41,7 +41,12 @@ public class Producto extends Base {
     private TipoProducto tipoProducto;
 
     @Builder.Default
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "detalles_de_producto",
+            joinColumns = @JoinColumn(name = "id_producto"),
+            inverseJoinColumns =@JoinColumn(name = "id_detalle")
+    )
     @JsonManagedReference("producto-detalle")
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
 

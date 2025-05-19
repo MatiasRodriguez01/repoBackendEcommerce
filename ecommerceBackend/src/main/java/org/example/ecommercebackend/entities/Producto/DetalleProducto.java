@@ -23,7 +23,7 @@ public class DetalleProducto extends Base {
     @Builder.Default
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "fk_talle",
+            name = "talles_del_detalle",
             joinColumns = @JoinColumn(name = "id_detalle"),
             inverseJoinColumns =@JoinColumn(name = "id_talle")
     )

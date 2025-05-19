@@ -23,6 +23,85 @@ public class ProductoService extends BaseService<Producto, Long> {
     }
 
     // ----------------------- METODOS PARA LAS CONSULTAS DE LA BD -------------------------
+    @Transactional
+    public List<DetalleProducto> filtarDetalleProducto(Long id, String seccion,
+                                                       String categoria, String talle,
+                                                       String tipo, String orden) throws Exception {
+        try {
+
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
+//            if(!orden.equals("asc") || !orden.equals("desc")){
+//                throw new Exception("El atributo 'orden' deber ser: [desc o asc]");
+//            }
+            return productoRepository.filtrarDetalleProducto(id, seccion, categoria, talle, tipo, orden);
+        }   catch (Exception e) {
+            throw new Exception("Ocurrio un error al mostrar los detalles de producto[" + id +"]: " + e.getMessage());
+        }
+    }
+
+    @Transactional
+    public List<DetalleProducto> ordenarDetalleSinOrden(Long id, String seccion,
+                                                        String categoria, String talle,
+                                                        String tipo) throws Exception {
+        try {
+
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
+            return productoRepository.ordenarDetalleSinOrden(id, seccion, categoria, talle, tipo);
+        } catch (Exception e) {
+            throw new Exception("Ocurrio un error al ordenar sin orden los detalles de producto[" + id +"]: " + e.getMessage());
+        }
+    }
+
+    @Transactional
+    public List<DetalleProducto> ordenarDetalleSinTipo(Long id, String seccion,
+                                                       String categoria, String talle,
+                                                       String orden) throws Exception {
+        try {
+//            String ordenLower = orden.toLowerCase();
+//            if(!ordenLower.equals("asc") || !ordenLower.equals("desc")){
+//                throw new Exception("El atributo 'orden' deber ser: [desc o asc]");
+//            }
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+
+            return productoRepository.ordenarDetalleSinTipo(id, seccion, categoria, talle, orden);
+        } catch (Exception e) {
+            throw new Exception("Ocurrio un error al ordenar sin tipo los detalles de producto[" + id +"]: " + e.getMessage());
+        }
+    }
+
+    @Transactional
+    public List<DetalleProducto> ordenarDetalleSinTalle(Long id, String seccion,
+                                                        String categoria, String tipo,
+                                                        String orden) throws Exception {
+        try {
+//            String ordenLower = orden.toLowerCase();
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
+//            if(!ordenLower.equals("asc") || !ordenLower.equals("desc")){
+//                throw new Exception("El atributo 'orden' deber ser: [desc o asc]");
+//            }
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+            return productoRepository.ordenarDetalleSinTalle(id, seccion, categoria, tipo, orden);
+
+        } catch (Exception e) {
+            throw new Exception("Ocurrio un error al ordenar sin talle los detalles de producto[" + id +"]: " + e.getMessage());
+        }
+    }
 
     @Transactional
     public List<DetalleProducto> ordenarDetallesPorProducto(Long id, String seccion, String categoria) throws Exception {
@@ -30,9 +109,9 @@ public class ProductoService extends BaseService<Producto, Long> {
             Producto producto = productoRepository.findById(id)
                     .orElseThrow(() -> new Exception("Producto no encontrado con id: " + id));
 
-            if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
-                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
-            }
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
             return productoRepository.ordenarDetallesPorProducto(producto.getId(), seccion, categoria);
         } catch (Exception e) {
             throw new Exception("Ocurrio un error al ordenar los detalles de producto[" + id +"]: " + e.getMessage());
@@ -48,9 +127,9 @@ public class ProductoService extends BaseService<Producto, Long> {
           Producto producto = productoRepository.findById(id)
                   .orElseThrow(() -> new Exception("Producto no encontrado con id: " + id));
 
-          if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
-              throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
-          }
+//          if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
+//              throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//          }
           return productoRepository.ordenarDetallesPorTalleDeProducto(
                   producto.getId(),
                   seccion,
@@ -72,12 +151,12 @@ public class ProductoService extends BaseService<Producto, Long> {
                     .orElseThrow(() -> new Exception("Producto no encontrado con id: " + id));
 
 
-            if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
-                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
-            }
-            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
-                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
-            }
+//            if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
             return productoRepository.ordenarDetallePorTipodeproducto(
                     producto.getId(),
                     seccion,
@@ -99,9 +178,9 @@ public class ProductoService extends BaseService<Producto, Long> {
             Producto producto = productoRepository.findById(id)
                     .orElseThrow(() -> new Exception("Producto no encontrado con id: " + id));
 
-            if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
-                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
-            }
+//            if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
             switch (orden) {
                 case "ascendiente":
                     return productoRepository.ordenarDetallePorPrecioAscendente(producto.getId(), seccion, categoria);

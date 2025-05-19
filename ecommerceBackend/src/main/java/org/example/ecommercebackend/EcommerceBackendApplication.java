@@ -21,228 +21,147 @@ public class EcommerceBackendApplication {
 
 //    @Bean
 //    @Transactional
-//    CommandLineRunner init   (DetalleProductoRepository detalleProductoRepository,
-//                            ProductoRepository productoRepository,
-//                            CategoriaRepository categoriaRepository,
-//                            TallesRepository tallesRepository,
-//                            DescuentoRepository descuentoRepository,
-//                            PrecioRepository precioRepository,
-//                            ImagenProductoRepository imagenProductoRepository){
+//    CommandLineRunner initNuevo(
+//            DetalleProductoRepository detalleProductoRepository,
+//            ProductoRepository productoRepository,
+//            CategoriaRepository categoriaRepository,
+//            TallesRepository tallesRepository,
+//            DescuentoRepository descuentoRepository,
+//            PrecioRepository precioRepository,
+//            ImagenProductoRepository imagenProductoRepository) {
 //        return args -> {
 //
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //
-//            // descuentos:
-//            Descuento descuento1 = Descuento.builder().
-//                    fechaInicio(sdf.parse("2025-05-01")).
-//                    fechaFin(sdf.parse("2025-08-01")).
-//                    build();
-//            descuentoRepository.save(descuento1);
+//            // Categorías
+//            Categoria training = Categoria.builder()
+//                    .nombre("training")
+//                    .categoriaPadre(null)
+//                    .build();
+//            categoriaRepository.save(training);
 //
-//            Descuento descuento2 = Descuento.builder().
-//                    fechaInicio(sdf.parse("2025-08-12")).
-//                    fechaFin(sdf.parse("2025-10-29")).
-//                    build();
-//            descuentoRepository.save(descuento2);
+//            Categoria running = Categoria.builder()
+//                    .nombre("running")
+//                    .categoriaPadre(null)
+//                    .build();
+//            categoriaRepository.save(running);
 //
-//            Descuento descuento3 = Descuento.builder().
-//                    fechaInicio(sdf.parse("2025-09-15")).
-//                    fechaFin(sdf.parse("2025-09-20")).
-//                    build();
-//            descuentoRepository.save(descuento3);
+//            // Talles
+//            Talles talle41 = Talles.builder().talle("41").build();
+//            Talles talle39 = Talles.builder().talle("39").build();
+//            Talles talleXXL = Talles.builder().talle("XXL").build();
+//            Talles talleM = Talles.builder().talle("M").build();
 //
-//            Descuento descuento4 = Descuento.builder().
-//                    fechaInicio(sdf.parse("2025-09-15")).
-//                    fechaFin(sdf.parse("2025-09-20")).
-//                    build();
-//            descuentoRepository.save(descuento4);
+//            tallesRepository.save(talle41);
+//            tallesRepository.save(talle39);
+//            tallesRepository.save(talleXXL);
+//            tallesRepository.save(talleM);
 //
-//            // Precios:
-//            Precio precio1 = Precio.builder().
-//                    precioCompra(56000).
-//                    precioVenta(65000).
-//                    descuento(descuento1).
-//                    build();
+//
+//            // Descuentos
+//            Descuento desc1 = Descuento.builder().fechaInicio(sdf.parse("2025-06-01")).fechaFin(sdf.parse("2025-07-01")).build();
+//            Descuento desc2 = Descuento.builder().fechaInicio(sdf.parse("2025-07-05")).fechaFin(sdf.parse("2025-08-05")).build();
+//            Descuento desc3 = Descuento.builder().fechaInicio(sdf.parse("2025-08-10")).fechaFin(sdf.parse("2025-09-10")).build();
+//            Descuento desc4 = Descuento.builder().fechaInicio(sdf.parse("2025-06-15")).fechaFin(sdf.parse("2025-07-20")).build();
+//            Descuento desc5 = Descuento.builder().fechaInicio(sdf.parse("2025-07-25")).fechaFin(sdf.parse("2025-08-25")).build();
+//            Descuento desc6 = Descuento.builder().fechaInicio(sdf.parse("2025-08-30")).fechaFin(sdf.parse("2025-09-30")).build();
+//
+//            descuentoRepository.save(desc1);
+//            descuentoRepository.save(desc2);
+//            descuentoRepository.save(desc3);
+//            descuentoRepository.save(desc4);
+//            descuentoRepository.save(desc5);
+//            descuentoRepository.save(desc6);
+//
+//            // Precios
+//            Precio precio1 = Precio.builder().precioCompra(50000).precioVenta(60000).descuento(desc1).build();
+//            Precio precio2 = Precio.builder().precioCompra(52000).precioVenta(63000).descuento(desc2).build();
+//            Precio precio3 = Precio.builder().precioCompra(54000).precioVenta(65000).descuento(desc3).build();
+//            Precio precio4 = Precio.builder().precioCompra(30000).precioVenta(40000).descuento(desc4).build();
+//            Precio precio5 = Precio.builder().precioCompra(32000).precioVenta(42000).descuento(desc5).build();
+//            Precio precio6 = Precio.builder().precioCompra(35000).precioVenta(45000).descuento(desc6).build();
+//
 //            precioRepository.save(precio1);
-//
-//            Precio precio2 = Precio.builder().
-//                    precioCompra(76000).
-//                    precioVenta(90000).
-//                    descuento(descuento2).
-//                    build();
 //            precioRepository.save(precio2);
-//
-//            Precio precio3 = Precio.builder().
-//                    precioCompra(50000).
-//                    precioVenta(70000).
-//                    descuento(descuento3).
-//                    build();
 //            precioRepository.save(precio3);
-//
-//            Precio precio4 = Precio.builder().
-//                    precioCompra(79000).
-//                    precioVenta(81000).
-//                    descuento(descuento4).
-//                    build();
 //            precioRepository.save(precio4);
+//            precioRepository.save(precio5);
+//            precioRepository.save(precio6);
 //
-//            // imagenes:
-//            ImagenProducto imagen1 = ImagenProducto.builder().
-//                    url("https://i.pinimg.com/736x/2b/8c/11/2b8c111e571a104592c8b756ecfccce3.jpg").
-//                    alt("Zapatillas urbanas").
-//                    build();
-//            imagenProductoRepository.save(imagen1);
+//            // Imágenes
+//            ImagenProducto img1 = ImagenProducto.builder().url("https://th.bing.com/th/id/OIP.aAKvsf0isFIqOVqdH_ffNgHaHa?rs=1&pid=ImgDetMain").alt("Imagen 1").build();
+//            ImagenProducto img2 = ImagenProducto.builder().url("https://http2.mlstatic.com/D_NQ_NP_989930-MCO26513865735_122017-O.jpg").alt("Imagen 2").build();
+//            ImagenProducto img3 = ImagenProducto.builder().url("https://th.bing.com/th/id/OIP.nL_MnvuMvSo9BzTy0Gr1AgHaHa?rs=1&pid=ImgDetMain").alt("Imagen 3").build();
+//            ImagenProducto img4 = ImagenProducto.builder().url("https://www.digitalsport.com.ar/files/products/5c9e851d8d702-467487-1200x1200.jpg").alt("Imagen 4").build();
+//            ImagenProducto img5 = ImagenProducto.builder().url("https://th.bing.com/th/id/OIP.0cDWHbxHfdSEsCNEAHRa5QHaHa?rs=1&pid=ImgDetMain").alt("Imagen 5").build();
+//            ImagenProducto img6 = ImagenProducto.builder().url("https://showsport.vtexassets.com/arquivos/ids/813885/PRN-P1598440--1-.jpg?v=638447428071370000").alt("Imagen 6").build();
 //
-//            ImagenProducto imagen2 = ImagenProducto.builder().
-//                    url("https://img.fantaskycdn.com/f78015538f96c218b5fb5ab45fa34fe3.jpeg").
-//                    alt("Zapatillas deportivas").
-//                    build();
-//            imagenProductoRepository.save(imagen2);
+//            imagenProductoRepository.save(img1);
+//            imagenProductoRepository.save(img2);
+//            imagenProductoRepository.save(img3);
+//            imagenProductoRepository.save(img4);
+//            imagenProductoRepository.save(img5);
+//            imagenProductoRepository.save(img6);
 //
-//            ImagenProducto imagen3 = ImagenProducto.builder().
-//                    url("https://i.pinimg.com/736x/3e/ab/bd/3eabbd4a90e0b4154c16e30ac08ea35f.jpg").
-//                    alt("Remera deportiva").
-//                    build();
-//            imagenProductoRepository.save(imagen3);
+//            // DetalleProductos y Productos
+//            DetalleProducto det1 = DetalleProducto.builder().stock(5).color("rojo").estado(true).precio(precio1).imagenProducto(img1).build();
+//            det1.getTallesDetalleProductos().add(talle41);
+//            detalleProductoRepository.save(det1);
 //
-//            ImagenProducto imagen4 = ImagenProducto.builder().
-//                    url("https://i.pinimg.com/736x/18/99/9d/18999d50afe296b8fc0a5a14dfc743de.jpg").
-//                    alt("Remera Urbana").
-//                    build();
-//            imagenProductoRepository.save(imagen4);
+//            Producto prod1 = Producto.builder().nombre("Zapatilla Training 1").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.MASCULINO).categoria(training).build();
+//            prod1.addDetalleProducto(det1);
+//            productoRepository.save(prod1);
 //
-//            //
+//            DetalleProducto det2 = DetalleProducto.builder().stock(4).color("azul").estado(true).precio(precio2).imagenProducto(img2).build();
+//            det2.getTallesDetalleProductos().add(talle39);
+//            detalleProductoRepository.save(det2);
 //
-//            // talles
-//            Talles talle1 = Talles.builder().
-//                    talle("42").
-//                    build();
-//            tallesRepository.save(talle1);
+//            Producto prod2 = Producto.builder().nombre("Zapatilla Running 2").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.FEMENINO).categoria(running).build();
+//            prod2.addDetalleProducto(det2);
+//            productoRepository.save(prod2);
 //
-//            Talles talle2 = Talles.builder().
-//                    talle("XL").
-//                    build();
-//            tallesRepository.save(talle2);
+//            DetalleProducto det3 = DetalleProducto.builder().stock(6).color("negro").estado(true).precio(precio3).imagenProducto(img3).build();
+//            det3.getTallesDetalleProductos().add(talle41);
+//            detalleProductoRepository.save(det3);
 //
-//            Talles talle3 = Talles.builder().
-//                    talle("40").
-//                    build();
-//            tallesRepository.save(talle3);
+//            Producto prod3 = Producto.builder().nombre("Zapatilla Training 3").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.MASCULINO).categoria(training).build();
+//            prod3.addDetalleProducto(det3);
+//            productoRepository.save(prod3);
 //
-//            Talles talle4 = Talles.builder().
-//                    talle("L").
-//                    build();
-//            tallesRepository.save(talle4);
+//            DetalleProducto det4 = DetalleProducto.builder().stock(7).color("verde").estado(true).precio(precio4).imagenProducto(img4).build();
+//            det4.getTallesDetalleProductos().add(talleXXL);
+//            detalleProductoRepository.save(det4);
 //
-//            // detalle de ropa deportiva
-//            DetalleProducto detalle1 = DetalleProducto.builder().
-//                    stock(6).
-//                    color("rojo").
-//                    estado(true).
-//                    build();
-//            detalle1.getTallesDetalleProductos().add(talle1);
-//            detalle1.getTallesDetalleProductos().add(talle3);
-//            detalle1.setPrecio(precio1);
-//            detalle1.setImagenProducto(imagen1);
-//            detalleProductoRepository.saveAndFlush(detalle1);
-////
-//            DetalleProducto detalle2 = DetalleProducto.builder().
-//                    stock(5).
-//                    color("azul").
-//                    estado(true).
-//                    imagenProducto(imagen3).
-//                    build();
-//            detalle2.getTallesDetalleProductos().add(talle2);
-//            detalle2.getTallesDetalleProductos().add(talle4);
-//            detalle2.setPrecio(precio2);
-//            detalle2.setImagenProducto(imagen3);
-//            detalleProductoRepository.saveAndFlush(detalle2);
+//            Producto prod4 = Producto.builder().nombre("Remera Running 4").tipoProducto(TipoProducto.ROPA).seccion(Seccion.FEMENINO).categoria(running).build();
+//            prod4.addDetalleProducto(det4);
+//            productoRepository.save(prod4);
 //
-//            // detalle de ropa urbana
+//            DetalleProducto det5 = DetalleProducto.builder().stock(8).color("blanco").estado(true).precio(precio5).imagenProducto(img5).build();
+//            det5.getTallesDetalleProductos().add(talleM);
+//            detalleProductoRepository.save(det5);
 //
-//            // detalle de ropa deportiva
-//            DetalleProducto detalle3 = DetalleProducto.builder().
-//                    stock(6).
-//                    color("rojo").
-//                    estado(Boolean.TRUE).
-//                    build();
-//            detalle3.getTallesDetalleProductos().add(talle1);
-//            detalle3.getTallesDetalleProductos().add(talle3);
-//            detalle3.setPrecio(precio3);
-//            detalle3.setImagenProducto(imagen2);
-//            detalleProductoRepository.saveAndFlush(detalle3);
+//            Producto prod5 = Producto.builder().nombre("Camiseta Training 5").tipoProducto(TipoProducto.ROPA).seccion(Seccion.MASCULINO).categoria(training).build();
+//            prod5.addDetalleProducto(det5);
+//            productoRepository.save(prod5);
 //
-//            DetalleProducto detalle4 = DetalleProducto.builder().
-//                    stock(8).
-//                    color("azul").
-//                    estado(true).
-//                    build();
-//            detalle4.getTallesDetalleProductos().add(talle2);
-//            detalle4.getTallesDetalleProductos().add(talle4);
-//            detalle4.setPrecio(precio4);
-//            detalle4.setImagenProducto(imagen4);
-//            detalleProductoRepository.saveAndFlush(detalle4);
+//            DetalleProducto det6 = DetalleProducto.builder().stock(9).color("gris").estado(true).precio(precio6).imagenProducto(img6).build();
+//            det6.getTallesDetalleProductos().add(talleXXL);
+//            detalleProductoRepository.save(det6);
 //
-//            //
-//            Categoria cate1 = Categoria.builder().
-//                    nombre("deportes").
-//                    categoriaPadre(null).
-//                    build();
-//            categoriaRepository.save(cate1);
+//            Producto prod6 = Producto.builder().nombre("Remera Running 6").tipoProducto(TipoProducto.ROPA).seccion(Seccion.FEMENINO).categoria(running).build();
+//            prod6.addDetalleProducto(det6);
+//            productoRepository.save(prod6);
 //
-//            Categoria cate2 = Categoria.builder().
-//                    nombre("urbano").
-//                    categoriaPadre(null).
-//                    build();
-//            categoriaRepository.save(cate2);
+//            // Asignar productos a categorías
+//            training.addProducto(prod1);
+//            training.addProducto(prod3);
+//            training.addProducto(prod5);
+//            categoriaRepository.save(training);
 //
-//            Producto producto1 = Producto.builder().
-//                    nombre("camiseta de futbol").
-//                    tipoProducto(TipoProducto.ROPA).
-//                    seccion(Seccion.FEMENINO).
-//                    build();
-//            producto1.addDetalleProducto(detalle3);
-//            productoRepository.saveAndFlush(producto1);
-//
-//            Producto producto2 = Producto.builder().
-//                    nombre("zapatilla deportivas").
-//                    tipoProducto(TipoProducto.ZAPATILLA).
-//                    seccion(Seccion.FEMENINO).
-//                    build();
-//            producto2.setCategoria(cate1);
-//            producto2.addDetalleProducto(detalle1);
-//            productoRepository.save(producto2);
-//
-//            cate1.addProducto(producto1);
-//            cate1.addProducto(producto2);
-//            categoriaRepository.saveAndFlush(cate1);
-//
-//
-//            Producto producto3 = Producto.builder().
-//                    nombre("zapatilla urbanas").
-//                    tipoProducto(TipoProducto.ZAPATILLA).
-//                    seccion(Seccion.FEMENINO).
-//                    build();
-//            producto3.setCategoria(cate2);
-//            producto3.addDetalleProducto(detalle2);
-//            productoRepository.save(producto3);
-//
-//
-//            Producto producto4 = Producto.builder().
-//                    nombre("remera urbana").
-//                    tipoProducto(TipoProducto.ROPA).
-//                    seccion(Seccion.MASCULINO).
-//                    build();
-//            producto4.setCategoria(cate2);
-//            producto4.addDetalleProducto(detalle4);
-//            productoRepository.save(producto4);
-//
-//
-//            cate2.addProducto(producto3);
-//            cate2.addProducto(producto4);
-//            categoriaRepository.saveAndFlush(cate2);
-//
-//
+//            running.addProducto(prod2);
+//            running.addProducto(prod4);
+//            running.addProducto(prod6);
+//            categoriaRepository.save(running);
 //        };
 //    }
 
