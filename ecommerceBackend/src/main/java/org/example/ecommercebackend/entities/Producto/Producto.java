@@ -31,14 +31,21 @@ public class Producto extends Base {
     @JsonBackReference("categoria-producto")
     private Categoria categoria;
 
-    @Column(name = "sexo")
-    private String sexo;
+    @Column(name = "seccion")
+    @Enumerated(EnumType.STRING)
+    private Seccion seccion;
 
     @Column(name = "tipo_producto")
+    @Enumerated(EnumType.STRING)
     private TipoProducto tipoProducto;
 
     @Builder.Default
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "detalles_de_producto",
+            joinColumns = @JoinColumn(name = "id_producto"),
+            inverseJoinColumns =@JoinColumn(name = "id_detalle")
+    )
     @JsonManagedReference("producto-detalle")
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
 

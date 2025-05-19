@@ -2,7 +2,10 @@ package org.example.ecommercebackend.entities.Producto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.jdi.BooleanType;
 import jakarta.persistence.*;
+import jdk.jfr.BooleanFlag;
 import lombok.*;
 import org.example.ecommercebackend.entities.Base;
 
@@ -21,7 +24,7 @@ public class DetalleProducto extends Base {
     @Builder.Default
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "fk_talle",
+            name = "talles_del_detalle",
             joinColumns = @JoinColumn(name = "id_detalle"),
             inverseJoinColumns =@JoinColumn(name = "id_talle")
     )
