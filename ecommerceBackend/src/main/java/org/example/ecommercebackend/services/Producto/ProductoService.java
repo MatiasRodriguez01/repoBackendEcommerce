@@ -39,7 +39,14 @@ public class ProductoService extends BaseService<Producto, Long> {
 //            if(!orden.equals("asc") || !orden.equals("desc")){
 //                throw new Exception("El atributo 'orden' deber ser: [desc o asc]");
 //            }
-            return productoRepository.filtrarDetalleProducto(id, seccion, categoria, talle, tipo, orden);
+            switch(orden) {
+                case "asc":
+                    return productoRepository.filtrarDetalleProductoAscendiente(id, seccion, categoria, talle, tipo);
+                case "desc":
+                    return productoRepository.filtrarDetalleProductoDescendiente(id, seccion, categoria, talle, tipo);
+            }
+
+            throw new Exception("En seccion debera seleccionar: [des o asc]");
         }   catch (Exception e) {
             throw new RuntimeException("Ocurrio un error al mostrar los detalles de producto[" + id +"]: " + e.getMessage());
         }
@@ -76,7 +83,14 @@ public class ProductoService extends BaseService<Producto, Long> {
 //                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
 //            }
 
-            return productoRepository.ordenarDetalleSinTipo(id, seccion, categoria, talle, orden);
+            switch(orden) {
+                case "asc":
+                    return productoRepository.ordenarDetalleSinTipoAscendiente(id, seccion, categoria, talle);
+                case "desc":
+                    return productoRepository.ordenarDetalleSinTipoDescendiente(id, seccion, categoria, talle);
+            }
+
+            throw new Exception("En seccion debera seleccionar: [des o asc]");
         } catch (Exception e) {
             throw new RuntimeException("Ocurrio un error al ordenar sin tipo los detalles de producto[" + id +"]: " + e.getMessage());
         }
@@ -97,8 +111,14 @@ public class ProductoService extends BaseService<Producto, Long> {
 //            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
 //                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
 //            }
-            return productoRepository.ordenarDetalleSinTalle(id, seccion, categoria, tipo, orden);
+            switch(orden) {
+                case "asc":
+                    return productoRepository.ordenarDetalleSinTalleAscendiente(id, seccion, categoria, tipo);
+                case "desc":
+                    return productoRepository.ordenarDetalleSinTalleDescendiente(id, seccion, categoria, tipo);
+            }
 
+            throw new Exception("En seccion debera seleccionar: [des o asc]");
         } catch (Exception e) {
             throw new RuntimeException("Ocurrio un error al ordenar sin talle los detalles de producto[" + id +"]: " + e.getMessage());
         }
@@ -183,9 +203,9 @@ public class ProductoService extends BaseService<Producto, Long> {
 //                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
 //            }
             switch (orden) {
-                case "ascendiente":
+                case "asc":
                     return productoRepository.ordenarDetallePorPrecioAscendente(producto.getId(), seccion, categoria);
-                case "descendiente":
+                case "desc":
                     return productoRepository.ordenarDetallePorPrecioDescendente(producto.getId(), seccion, categoria);
                 default:
                     throw new Exception("El orden debe ser: [ascendiente, descendiente]");

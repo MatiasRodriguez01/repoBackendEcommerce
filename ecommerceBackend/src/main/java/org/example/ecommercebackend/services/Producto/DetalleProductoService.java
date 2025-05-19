@@ -19,52 +19,182 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
         super(detalleProductoRepository);
     }
 
-    @Transactional
-    public List<DetalleProducto> ordernarPorTipoProducto(String tipo) throws Exception {
+    // ----------------------- METODOS PARA LAS CONSULTAS DE LA BD -------------------------
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> filtarDetalleProducto(String seccion,
+                                                       String categoria, String talle,
+                                                       String tipo, String orden) throws Exception {
         try {
-            String tipoUpper = tipo.toUpperCase();
 
-            switch (tipoUpper) {
-                case "ZAPATILLA":
-                    return detalleProductoRepository.ordernarPorTipoProducto(tipo);
-                case "ROPA":
-                    return detalleProductoRepository.ordernarPorTipoProducto(tipo);
-                default:
-                    throw new Exception("El criterio de orden no es válido: " + tipo);
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
+//            if(!orden.equals("asc") || !orden.equals("desc")){
+//                throw new Exception("El atributo 'orden' deber ser: [desc o asc]");
+//            }
+            switch(orden) {
+                case "asc":
+                    return detalleProductoRepository.filtrarDetalleProductoAscendiente(seccion, categoria, talle, tipo);
+                case "desc":
+                    return detalleProductoRepository.filtrarDetalleProductoDescendiente(seccion, categoria, talle, tipo);
             }
-        } catch (Exception ex) {
-            throw new Exception("Ocurrio un error al orderar los detalle por tipo de producto: " + ex.getMessage());
+
+            throw new Exception("En seccion debera seleccionar: [des o asc]");
+        }   catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al mostrar los detalles: " + e.getMessage());
         }
     }
 
-    @Transactional
-    public List<DetalleProducto> orderPorPrecio(String orden) throws Exception {
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> ordenarDetalleSinOrden(String seccion,
+                                                        String categoria, String talle,
+                                                        String tipo) throws Exception {
         try {
-            String ordenLower = orden.toLowerCase();
 
-            switch (ordenLower) {
-                case "ascendiente":
-                    return detalleProductoRepository.ordenarPrecioAscendiente();
-                case "descendiente":
-                    return detalleProductoRepository.ordenarPrecioDescendiente();
-                default:
-                    throw new Exception("El criterio de orden no es válido: " + orden);
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
+            return detalleProductoRepository.ordenarDetalleSinOrden(seccion, categoria, talle, tipo);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al ordenar sin orden los detalles: " + e.getMessage());
+        }
+    }
+
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> ordenarDetalleSinTipo(String seccion,
+                                                       String categoria, String talle,
+                                                       String orden) throws Exception {
+        try {
+//            String ordenLower = orden.toLowerCase();
+//            if(!ordenLower.equals("asc") || !ordenLower.equals("desc")){
+//                throw new Exception("El atributo 'orden' deber ser: [desc o asc]");
+//            }
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+
+            switch(orden) {
+                case "asc":
+                    return detalleProductoRepository.ordenarDetalleSinTipoAscendiente(seccion, categoria, talle);
+                case "desc":
+                    return detalleProductoRepository.ordenarDetalleSinTipoDescendiente(seccion, categoria, talle);
             }
-        } catch (Exception ex) {
-            throw new Exception("Ocurrió un error al intentar ordenar los detalles por precio: " + ex.getMessage());
+
+            throw new Exception("En seccion debera seleccionar: [des o asc]");
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al ordenar sin tipo los detalles: " + e.getMessage());
         }
     }
 
-
-    @Transactional
-    public List<DetalleProducto> buscarPorTalleYCategoria(String talle, String categoria) throws Exception {
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> ordenarDetalleSinTalle(String seccion,
+                                                        String categoria, String tipo,
+                                                        String orden) throws Exception {
         try {
-            return detalleProductoRepository.buscarPorTalleYCategoria(talle, categoria);
+//            String ordenLower = orden.toLowerCase();
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
+//            if(!ordenLower.equals("asc") || !ordenLower.equals("desc")){
+//                throw new Exception("El atributo 'orden' deber ser: [desc o asc]");
+//            }
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+            switch(orden) {
+                case "asc":
+                    return detalleProductoRepository.ordenarDetalleSinTalleAscendiente(seccion, categoria, tipo);
+                case "desc":
+                    return detalleProductoRepository.ordenarDetalleSinTalleDescendiente(seccion, categoria, tipo);
+            }
 
-        } catch (Exception ex) {
-            throw new Exception("Ocurrio al ordenar por talle y categoria: " + ex.getMessage());
+            throw new Exception("En seccion debera seleccionar: [des o asc]");
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al ordenar sin talle los detalles: " + e.getMessage());
         }
     }
+
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> ordenarDetallesPorProducto(String seccion, String categoria) throws Exception {
+        try {
+//            if ((seccion != "FEMENINO") || (seccion != "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+            return detalleProductoRepository.ordenarDetallesPorProducto(seccion, categoria);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al ordenar los detalles: " + e.getMessage());
+        }
+    };
+
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> ordernarDetallesPorTalleDeProducto(String seccion,
+                                                                    String categoria,
+                                                                    String talle) throws Exception{
+        try {
+//          if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
+//              throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//          }
+            return detalleProductoRepository.ordenarDetallesPorTalleDeProducto(
+                    seccion,
+                    categoria,
+                    talle
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al ordenar por talle los detalles: " +e.getMessage());
+        }
+    };
+
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> ordenarDetallePorTipodeproducto(String seccion,
+                                                                 String categoria,
+                                                                 String tipo) throws Exception {
+        try {
+//            if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+//            if (!(tipo == "ROPA") || !(tipo == "ZAPATILLA")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [ROPA, ZAPATILLA]");
+//            }
+            return detalleProductoRepository.ordenarDetallePorTipodeproducto(
+                    seccion,
+                    categoria,
+                    tipo
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al ordenar por tipoproducto los detalles: " + e.getMessage());
+        }
+    }
+
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public List<DetalleProducto> ordenarDetallePorPrecio(String seccion,
+                                                         String categoria,
+                                                         String orden
+    ) throws Exception {
+        try {
+//            if (!(seccion == "FEMENINO") || !(seccion == "MASCULINO")) {
+//                throw new Exception("En seccion debera ingresar uno de los siguientes campos: [FEMENINO, MASCULINO]");
+//            }
+            switch (orden) {
+                case "asc":
+                    return detalleProductoRepository.ordenarDetallePorPrecioAscendente(seccion, categoria);
+                case "desc":
+                    return detalleProductoRepository.ordenarDetallePorPrecioDescendente(seccion, categoria);
+                default:
+                    throw new Exception("El orden debe ser: [ascendiente, descendiente]");
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al ordenar por precio los detalles: " + e.getMessage());
+        }
+    }
+
+    // -------------------------
     
     @Transactional
     public DetalleProducto agregarTalles(Long detalleId, Talles newTalle) throws Exception {
