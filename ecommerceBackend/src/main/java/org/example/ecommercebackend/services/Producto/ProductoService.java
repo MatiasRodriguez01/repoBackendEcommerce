@@ -1,6 +1,6 @@
 package org.example.ecommercebackend.services.Producto;
 
-import jakarta.transaction.Transactional;
+
 import org.example.ecommercebackend.entities.Producto.Categoria;
 import org.example.ecommercebackend.entities.Producto.DetalleProducto;
 import org.example.ecommercebackend.entities.Producto.Producto;
@@ -9,6 +9,7 @@ import org.example.ecommercebackend.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ProductoService extends BaseService<Producto, Long> {
     }
 
     // ----------------------- METODOS PARA LAS CONSULTAS DE LA BD -------------------------
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> filtarDetalleProducto(Long id, String seccion,
                                                        String categoria, String talle,
                                                        String tipo, String orden) throws Exception {
@@ -40,11 +41,11 @@ public class ProductoService extends BaseService<Producto, Long> {
 //            }
             return productoRepository.filtrarDetalleProducto(id, seccion, categoria, talle, tipo, orden);
         }   catch (Exception e) {
-            throw new Exception("Ocurrio un error al mostrar los detalles de producto[" + id +"]: " + e.getMessage());
+            throw new RuntimeException("Ocurrio un error al mostrar los detalles de producto[" + id +"]: " + e.getMessage());
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> ordenarDetalleSinOrden(Long id, String seccion,
                                                         String categoria, String talle,
                                                         String tipo) throws Exception {
@@ -58,11 +59,11 @@ public class ProductoService extends BaseService<Producto, Long> {
 //            }
             return productoRepository.ordenarDetalleSinOrden(id, seccion, categoria, talle, tipo);
         } catch (Exception e) {
-            throw new Exception("Ocurrio un error al ordenar sin orden los detalles de producto[" + id +"]: " + e.getMessage());
+            throw new RuntimeException("Ocurrio un error al ordenar sin orden los detalles de producto[" + id +"]: " + e.getMessage());
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> ordenarDetalleSinTipo(Long id, String seccion,
                                                        String categoria, String talle,
                                                        String orden) throws Exception {
@@ -77,11 +78,11 @@ public class ProductoService extends BaseService<Producto, Long> {
 
             return productoRepository.ordenarDetalleSinTipo(id, seccion, categoria, talle, orden);
         } catch (Exception e) {
-            throw new Exception("Ocurrio un error al ordenar sin tipo los detalles de producto[" + id +"]: " + e.getMessage());
+            throw new RuntimeException("Ocurrio un error al ordenar sin tipo los detalles de producto[" + id +"]: " + e.getMessage());
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> ordenarDetalleSinTalle(Long id, String seccion,
                                                         String categoria, String tipo,
                                                         String orden) throws Exception {
@@ -99,11 +100,11 @@ public class ProductoService extends BaseService<Producto, Long> {
             return productoRepository.ordenarDetalleSinTalle(id, seccion, categoria, tipo, orden);
 
         } catch (Exception e) {
-            throw new Exception("Ocurrio un error al ordenar sin talle los detalles de producto[" + id +"]: " + e.getMessage());
+            throw new RuntimeException("Ocurrio un error al ordenar sin talle los detalles de producto[" + id +"]: " + e.getMessage());
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> ordenarDetallesPorProducto(Long id, String seccion, String categoria) throws Exception {
         try {
             Producto producto = productoRepository.findById(id)
@@ -114,11 +115,11 @@ public class ProductoService extends BaseService<Producto, Long> {
 //            }
             return productoRepository.ordenarDetallesPorProducto(producto.getId(), seccion, categoria);
         } catch (Exception e) {
-            throw new Exception("Ocurrio un error al ordenar los detalles de producto[" + id +"]: " + e.getMessage());
+            throw new RuntimeException("Ocurrio un error al ordenar los detalles de producto[" + id +"]: " + e.getMessage());
         }
     };
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> ordernarDetallesPorTalleDeProducto(Long id,
                                                                     String seccion,
                                                                     String categoria,
@@ -137,11 +138,11 @@ public class ProductoService extends BaseService<Producto, Long> {
                   talle
           );
       } catch (Exception e) {
-          throw new Exception("Ocurrio un error al ordenar por talle los detalles de producto[" + id +"]: " +e.getMessage());
+          throw new RuntimeException("Ocurrio un error al ordenar por talle los detalles de producto[" + id +"]: " +e.getMessage());
       }
     };
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> ordenarDetallePorTipodeproducto(Long id,
                                                                  String seccion,
                                                                  String categoria,
@@ -164,11 +165,11 @@ public class ProductoService extends BaseService<Producto, Long> {
                     tipo
             );
         } catch (Exception e) {
-            throw new Exception("Ocurrio un error al ordenar por tipoproducto los detalles de producto[" + id +"]: " + e.getMessage());
+            throw new RuntimeException("Ocurrio un error al ordenar por tipoproducto los detalles de producto[" + id +"]: " + e.getMessage());
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> ordenarDetallePorPrecio(Long id,
                                                          String seccion,
                                                          String categoria,
@@ -191,7 +192,7 @@ public class ProductoService extends BaseService<Producto, Long> {
 
             }
         } catch (Exception e) {
-            throw new Exception("Ocurrio un error al ordenar por precio los detalles de producto[" + id +"]: " + e.getMessage());
+            throw new RuntimeException("Ocurrio un error al ordenar por precio los detalles de producto[" + id +"]: " + e.getMessage());
         }
     }
 
