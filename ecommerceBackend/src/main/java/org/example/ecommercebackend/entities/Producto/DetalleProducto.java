@@ -22,12 +22,7 @@ import java.util.List;
 public class DetalleProducto extends Base {
 
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "talles_del_detalle",
-            joinColumns = @JoinColumn(name = "id_detalle"),
-            inverseJoinColumns =@JoinColumn(name = "id_talle")
-    )
+    @ManyToMany(mappedBy = "producto",cascade = CascadeType.MERGE, o)
     private List<Talles> tallesDetalleProductos = new ArrayList<>();
 
     @Column(name = "stock")
