@@ -6,7 +6,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.jdi.BooleanType;
 import jakarta.persistence.*;
 import jdk.jfr.BooleanFlag;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.Getter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.example.ecommercebackend.entities.Base;
 
 import java.util.ArrayList;
@@ -22,7 +26,7 @@ import java.util.List;
 public class DetalleProducto extends Base {
 
     @Builder.Default
-    @ManyToMany(mappedBy = "producto",cascade = CascadeType.MERGE, o)
+    @ManyToMany(mappedBy = "producto",cascade = CascadeType.MERGE)
     private List<Talles> tallesDetalleProductos = new ArrayList<>();
 
     @Column(name = "stock")
