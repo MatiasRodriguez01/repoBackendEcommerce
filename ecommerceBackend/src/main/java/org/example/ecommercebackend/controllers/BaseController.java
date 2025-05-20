@@ -28,13 +28,13 @@ public class BaseController<E extends Base, ID extends Serializable> {
         return baseService.buscarPorId(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<E> crear(@RequestBody E entity) throws Exception {
         E entidadCreada = baseService.crear(entity);
         return ResponseEntity.ok(entidadCreada);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<E> actualizar(@RequestBody E entity) throws Exception {
         E entidadActualizada = baseService.actualizar(entity);
         return ResponseEntity.ok(entidadActualizada);

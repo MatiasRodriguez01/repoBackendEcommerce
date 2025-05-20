@@ -1,7 +1,6 @@
 package org.example.ecommercebackend.entities.Producto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +11,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "detalle_producto")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -40,7 +43,6 @@ public class DetalleProducto extends Base {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    @JsonBackReference("producto-detalle")
     private Producto producto;
 
     @OneToOne

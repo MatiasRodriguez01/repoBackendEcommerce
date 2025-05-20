@@ -1,7 +1,9 @@
 package org.example.ecommercebackend.entities.Producto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +17,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "productos")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -29,7 +35,6 @@ public class Producto extends Base {
 
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
-    @JsonBackReference("categoria-producto")
     private Categoria categoria;
 
     @Column(name = "sexo")
@@ -40,7 +45,6 @@ public class Producto extends Base {
 
     @Builder.Default
     @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE, orphanRemoval = true)
-    @JsonManagedReference("producto-detalle")
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
 
     public void addDetalleProducto(DetalleProducto detalleProducto) {
