@@ -1,16 +1,9 @@
 package org.example.ecommercebackend.entities.Producto;
 
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.sun.jdi.BooleanType;
 import jakarta.persistence.*;
-import jdk.jfr.BooleanFlag;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.Getter;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.ecommercebackend.entities.Base;
 
 import java.util.ArrayList;
@@ -18,6 +11,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "detalle_producto")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -25,8 +22,14 @@ import java.util.List;
 @Builder
 public class DetalleProducto extends Base {
 
+
     @Builder.Default
-    @ManyToMany(mappedBy = "producto",cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "fk_talle",
+            joinColumns = @JoinColumn(name = "id_detalle"),
+            inverseJoinColumns =@JoinColumn(name = "id_talle")
+    )
     private List<Talles> tallesDetalleProductos = new ArrayList<>();
 
     @Column(name = "stock")
@@ -40,7 +43,6 @@ public class DetalleProducto extends Base {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    @JsonBackReference("producto-detalle")
     private Producto producto;
 
     @OneToOne

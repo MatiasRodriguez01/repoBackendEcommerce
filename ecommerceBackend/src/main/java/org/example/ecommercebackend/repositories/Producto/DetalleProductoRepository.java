@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 @Repository
 public interface DetalleProductoRepository extends BaseRepository<DetalleProducto, Long> {
 
@@ -23,9 +24,9 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     @Query(value = """
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
-            inner join categorias c on c.id = ps.fk_categoria
-            inner join fk_talle ft on ft.id_detalle = dt.id
-            inner join talles t on t.id = ft.id_talle
+            	inner join categorias c on c.id = ps.fk_categoria
+            	inner join fk_talle ft on ft.id_detlle = dt.id
+        	inner join talles t on t.id = ft.id_talle
         where ps.seccion = :seccion and c.nombre = :categoria and t.talle = :talle;    
     """, nativeQuery = true)
     List<DetalleProducto> ordenarDetallesPorTalleDeProducto(@Param("seccion") String seccion,
@@ -36,9 +37,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
             inner join categorias c on c.id = ps.fk_categoria
-        where ps.seccion = :seccion and\s
-        	  c.nombre = :categoria and\s
-              ps.tipo_producto = :tipo;
+        where ps.seccion = :seccion and c.nombre = :categoria and ps.tipo_producto = :tipo;
     """, nativeQuery = true)
     List<DetalleProducto> ordenarDetallePorTipodeproducto(@Param("seccion") String seccion,
                                                           @Param("categoria") String categoria,
@@ -47,7 +46,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     @Query(value = """
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
-            inner join categorias c on c.id = ps.fk_categoria
+            	inner join categorias c on c.id = ps.fk_categoria
         	inner join precios p on p.id = dt.fk_precio
         where ps.seccion = :seccion and c.nombre = :categoria
         order by p.precio_venta asc;
@@ -58,7 +57,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     @Query(value = """
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
-            inner join categorias c on c.id = ps.fk_categoria
+            	inner join categorias c on c.id = ps.fk_categoria
         	inner join precios p on p.id = dt.fk_precio
         where ps.seccion = :seccion and c.nombre = :categoria
         order by p.precio_venta desc;
@@ -77,6 +76,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     List<DetalleProducto> ordenarDetalleSinTalleAscendiente(@Param("seccion") String seccion,
                                                             @Param("categoria") String categoria,
                                                             @Param("tipo") String tipo);
+
     @Query(value = """
     select dt.* from productos ps
     	inner join detalle_producto dt on dt.producto_id = ps.id
@@ -94,8 +94,8 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join detalle_producto dt on dt.producto_id = ps.id
                 inner join categorias c on c.id = ps.fk_categoria
             	inner join precios p on p.id = dt.fk_precio
-            	inner join fk_talle ft on ft.id_detalle = dt.id
-                inner join talles t on t.id = ft.id_talle
+            	inner join fk_talle ft on ft.id_detlle = dt.id
+        	inner join talles t on t.id = ft.id_talle
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle
             order by p.precio_venta asc;
             """, nativeQuery = true)
@@ -108,8 +108,8 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join detalle_producto dt on dt.producto_id = ps.id
                 inner join categorias c on c.id = ps.fk_categoria
             	inner join precios p on p.id = dt.fk_precio
-            	inner join fk_talle ft on ft.id_detalle = dt.id
-                inner join talles t on t.id = ft.id_talle
+            	inner join fk_talle ft on ft.id_detlle = dt.id
+        	inner join talles t on t.id = ft.id_talle
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle
             order by p.precio_venta desc;
             """, nativeQuery = true)
@@ -122,23 +122,24 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join detalle_producto dt on dt.producto_id = ps.id
                 inner join categorias c on c.id = ps.fk_categoria
             	inner join precios p on p.id = dt.fk_precio
-            	inner join fk_talle ft on ft.id_detalle = dt.id
-                inner join talles t on t.id = ft.id_talle
+            	inner join fk_talle ft on ft.id_detlle = dt.id
+        	inner join talles t on t.id = ft.id_talle
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo;
             """, nativeQuery = true)
     List<DetalleProducto> ordenarDetalleSinOrden(@Param("seccion") String seccion,
                                                  @Param("categoria") String categoria,
                                                  @Param("talle") String talle,
                                                  @Param("tipo") String tipo);
+
     @Query(value = """
-    select dt.* from productos ps
-        inner join detalle_producto dt on dt.producto_id = ps.id
-        inner join categorias c on c.id = ps.fk_categoria
-        inner join precios p on p.id = dt.fk_precio
-        inner join fk_talle ft on ft.id_detalle = dt.id
-    inner join talles t on t.id = ft.id_talle
-    where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo
-    order by p.precio_venta asc;
+        select dt.* from productos ps
+            inner join detalle_producto dt on dt.producto_id = ps.id
+            inner join categorias c on c.id = ps.fk_categoria
+            inner join precios p on p.id = dt.fk_precio
+            inner join fk_talle ft on ft.id_detlle = dt.id
+        	inner join talles t on t.id = ft.id_talle
+        where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo
+        order by p.precio_venta asc;
             """, nativeQuery = true)
     List<DetalleProducto> filtrarDetalleProductoAscendiente(@Param("seccion") String seccion,
                                                             @Param("categoria") String categoria,
@@ -150,8 +151,8 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
         inner join detalle_producto dt on dt.producto_id = ps.id
         inner join categorias c on c.id = ps.fk_categoria
         inner join precios p on p.id = dt.fk_precio
-        inner join fk_talle ft on ft.id_detalle = dt.id
-    inner join talles t on t.id = ft.id_talle
+        inner join fk_talle ft on ft.id_detlle = dt.id
+        inner join talles t on t.id = ft.id_talle
     where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo
     order by p.precio_venta desc;
             """, nativeQuery = true)
@@ -159,7 +160,4 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
                                                              @Param("categoria") String categoria,
                                                              @Param("talle") String talle,
                                                              @Param("tipo") String tipo);
-
-
-
 }
