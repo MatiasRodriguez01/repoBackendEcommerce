@@ -1,5 +1,7 @@
 package org.example.ecommercebackend.entities.Usuario;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,15 +14,21 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuario_direccion")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsuarioDireccion extends Base { //ES NECESARIO USUARIODIRECCION SI YA TENEMOS USUARIO Y DIRECCIONES?
+public class UsuarioDireccion extends Base {
 
-    //PONER RELACION ONE TO ONE A USUARIO BIEN
-    private Long idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Direccion> direcciones = new ArrayList<Direccion>();
+    @ManyToOne
+    @JoinColumn(name = "id_direccion")
+    private Direccion direccion;
 }

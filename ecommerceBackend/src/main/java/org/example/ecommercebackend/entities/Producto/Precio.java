@@ -5,8 +5,15 @@ import lombok.*;
 import lombok.Builder;
 import org.example.ecommercebackend.entities.Base;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "precios")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -5,14 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 import org.example.ecommercebackend.entities.Base;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "direcciones")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Direccion extends Base {
 
     @Column(name = "localidad")
@@ -26,5 +37,15 @@ public class Direccion extends Base {
 
     @Column(name = "departamento")
     private String departamento;
+
+    @Column(name = "nombre_calle")
+    private String nombreCalle;
+
+    @Column(name = "numeracion")
+    private Integer numeracion;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "direccion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioDireccion> usuarios = new ArrayList<>();
 
 }

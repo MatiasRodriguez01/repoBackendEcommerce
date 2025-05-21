@@ -10,11 +10,18 @@ import lombok.Setter;
 import lombok.Builder;
 import org.example.ecommercebackend.entities.Base;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "productos")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,7 +35,6 @@ public class Producto extends Base {
 
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
-    @JsonBackReference("categoria-producto")
     private Categoria categoria;
 
     @Column(name = "seccion")
@@ -46,7 +52,6 @@ public class Producto extends Base {
             joinColumns = @JoinColumn(name = "id_producto"),
             inverseJoinColumns =@JoinColumn(name = "id_detalle")
     )
-    @JsonManagedReference("producto-detalle")
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
 
     public void addDetalleProducto(DetalleProducto detalleProducto) {
