@@ -26,4 +26,6 @@ public class Descuento extends Base {
     @Column(name = "fecha_fin")
     private Date fechaFin;
 
+    @Column(name = "porcentaje")
+    private double porcentaje;
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.ecommercebackend.entities.Base;
+import org.example.ecommercebackend.entities.Producto.Producto;
 
 @Entity
 @Table(name = "orden_compra_detalle")
@@ -15,17 +16,17 @@ import org.example.ecommercebackend.entities.Base;
 @Setter
 public class OrdenCompraDetalle extends Base {
 
-    //esta relacion es many to one y ver si hacer bidireccional o no y si no ver cual entidad sera propietaria (creo que esta es mejor que sea bidireccional)
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_orden_compra")
-    private org.example.ecommercebackend.entities.Usuario.OrdenCompra ordenCompra;
 
-    //poner bien la relacion y ver bien cual relacion conviene que sea la propietaria
-    private Long idProducto;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_orden_compra")
+    private OrdenCompra ordenCompra;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_producto")
+    private Producto producto;
+
 
     @Column(name = "cantidad")
     private Integer cantidad;
-
-
 
 }

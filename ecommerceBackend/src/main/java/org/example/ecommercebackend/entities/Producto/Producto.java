@@ -32,7 +32,6 @@ public class Producto extends Base {
     @Column(name = "nombre")
     private String nombre;
 
-
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
     private Categoria categoria;

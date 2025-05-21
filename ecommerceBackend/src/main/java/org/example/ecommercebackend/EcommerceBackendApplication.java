@@ -18,15 +18,16 @@ public class EcommerceBackendApplication {
         SpringApplication.run(EcommerceBackendApplication.class, args);
         System.out.println("Servidor iniciando");
     }
+
     @Bean
     @Transactional
-    CommandLineRunner init   (DetalleProductoRepository detalleProductoRepository,
-                                ProductoRepository productoRepository,
-                                CategoriaRepository categoriaRepository,
-                                TallesRepository tallesRepository,
-                              DescuentoRepository descuentoRepository,
-                              PrecioRepository precioRepository,
-                              ImagenProductoRepository imagenProductoRepository){
+    CommandLineRunner init(DetalleProductoRepository detalleProductoRepository,
+                           ProductoRepository productoRepository,
+                           CategoriaRepository categoriaRepository,
+                           TallesRepository tallesRepository,
+                           DescuentoRepository descuentoRepository,
+                           PrecioRepository precioRepository,
+                           ImagenProductoRepository imagenProductoRepository) {
         return args -> {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -35,7 +36,8 @@ public class EcommerceBackendApplication {
             Descuento descuento1 = Descuento.builder().
                     fechaInicio(sdf.parse("2025-05-01")).
                     fechaFin(sdf.parse("2025-08-01")).
-                    build();
+                    porcentaje(0.15)
+                    .build();
             descuentoRepository.save(descuento1);
 
             Descuento descuento2 = Descuento.builder().
@@ -144,7 +146,8 @@ public class EcommerceBackendApplication {
             detalle1.setPrecio(precio1);
             detalle1.setImagenProducto(imagen1);
             detalleProductoRepository.saveAndFlush(detalle1);
-//
+
+
             DetalleProducto detalle2 = DetalleProducto.builder().
                     stock(5).
                     color("azul").

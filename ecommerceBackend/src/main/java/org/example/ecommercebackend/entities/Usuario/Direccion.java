@@ -1,11 +1,11 @@
 package org.example.ecommercebackend.entities.Usuario;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.example.ecommercebackend.entities.Base;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "direcciones")
@@ -13,6 +13,7 @@ import org.example.ecommercebackend.entities.Base;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Direccion extends Base {
 
     @Column(name = "localidad")
@@ -27,4 +28,13 @@ public class Direccion extends Base {
     @Column(name = "departamento")
     private String departamento;
 
+    @Column(name = "nombre_calle")
+    private String nombreCalle;
+
+    @Column(name = "numeracion")
+    private Integer numeracion;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "direccion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioDireccion> usuarios = new ArrayList<>();
 }

@@ -1,14 +1,8 @@
 package org.example.ecommercebackend.entities.Usuario;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.example.ecommercebackend.entities.Base;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "usuario_direccion")
@@ -16,11 +10,13 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsuarioDireccion extends Base { //ES NECESARIO USUARIODIRECCION SI YA TENEMOS USUARIO Y DIRECCIONES?
+public class UsuarioDireccion extends Base {
 
-    //PONER RELACION ONE TO ONE A USUARIO BIEN
-    private Long idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Direccion> direcciones = new ArrayList<Direccion>();
+    @ManyToOne
+    @JoinColumn(name = "id_direccion")
+    private Direccion direccion;
 }
