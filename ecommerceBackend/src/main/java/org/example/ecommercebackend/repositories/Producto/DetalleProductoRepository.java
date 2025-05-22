@@ -25,7 +25,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
             	inner join categorias c on c.id = ps.fk_categoria
-            	inner join fk_talle ft on ft.id_detlle = dt.id
+            	inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
         where ps.seccion = :seccion and c.nombre = :categoria and t.talle = :talle;    
     """, nativeQuery = true)
@@ -94,7 +94,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join detalle_producto dt on dt.producto_id = ps.id
                 inner join categorias c on c.id = ps.fk_categoria
             	inner join precios p on p.id = dt.fk_precio
-            	inner join fk_talle ft on ft.id_detlle = dt.id
+            	inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle
             order by p.precio_venta asc;
@@ -108,7 +108,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join detalle_producto dt on dt.producto_id = ps.id
                 inner join categorias c on c.id = ps.fk_categoria
             	inner join precios p on p.id = dt.fk_precio
-            	inner join fk_talle ft on ft.id_detlle = dt.id
+            	inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle
             order by p.precio_venta desc;
@@ -122,7 +122,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join detalle_producto dt on dt.producto_id = ps.id
                 inner join categorias c on c.id = ps.fk_categoria
             	inner join precios p on p.id = dt.fk_precio
-            	inner join fk_talle ft on ft.id_detlle = dt.id
+            	inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo;
             """, nativeQuery = true)
@@ -136,7 +136,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             inner join detalle_producto dt on dt.producto_id = ps.id
             inner join categorias c on c.id = ps.fk_categoria
             inner join precios p on p.id = dt.fk_precio
-            inner join fk_talle ft on ft.id_detlle = dt.id
+            inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
         where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo
         order by p.precio_venta asc;
@@ -151,7 +151,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
         inner join detalle_producto dt on dt.producto_id = ps.id
         inner join categorias c on c.id = ps.fk_categoria
         inner join precios p on p.id = dt.fk_precio
-        inner join fk_talle ft on ft.id_detlle = dt.id
+        inner join fk_talle ft on ft.id_detalle = dt.id
         inner join talles t on t.id = ft.id_talle
     where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo
     order by p.precio_venta desc;
