@@ -1,9 +1,13 @@
 package org.example.ecommercebackend.springsecurity.auth;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.ecommercebackend.entities.Usuario.Rol;
 
 @Data
 @Builder
@@ -11,10 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
 
-    String username;
-    String password;
-    String firstname;
-    String lastname;
-    String country;
+    String nombre;
+    String contraseña;
+    String email;
+    Integer dni;
 
 }

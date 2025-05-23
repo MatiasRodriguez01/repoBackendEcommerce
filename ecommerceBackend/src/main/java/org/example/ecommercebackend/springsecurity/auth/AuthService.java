@@ -1,7 +1,9 @@
 package org.example.ecommercebackend.springsecurity.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.example.ecommercebackend.springsecurity.User.Rol;
+import org.example.ecommercebackend.entities.Usuario.Rol;
+import org.example.ecommercebackend.entities.Usuario.Usuario;
+import org.example.ecommercebackend.repositories.Usuario.UsuarioRepository;
 import org.example.ecommercebackend.springsecurity.User.User;
 import org.example.ecommercebackend.springsecurity.User.UserRepository;
 import org.example.ecommercebackend.springsecurity.jwt.JwtService;
@@ -16,14 +18,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UserRepository userRepository;
+    private final UsuarioRepository usuarioRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getNombre(), request.getContraseña()));
+        UserDetails user = usuarioRepository.findByUsername(request.getNombre()).orElseThrow();
         String token = jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)
@@ -31,16 +33,15 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
-        User user = User.builder()
-                .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
-                .country(request.getCountry())
-                .role(Rol.USER)
+        Usuario user = Usuario.builder()
+                .nombre(request.getNombre())
+                .contraseña(passwordEncoder.encode(request.getContraseña()))
+                .rol(Rol.CLIENTE)
+                .email(request.getEmail())
+                .dni(request.getDni())
                 .build();
 
-        userRepository.save(user);
+        usuarioRepository.save(user);
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
                 .build();

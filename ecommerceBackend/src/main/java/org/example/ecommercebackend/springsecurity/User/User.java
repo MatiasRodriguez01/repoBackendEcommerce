@@ -18,7 +18,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"})
+    }
+)
 public class User extends Base implements UserDetails {
 
     @Column(nullable = false)
