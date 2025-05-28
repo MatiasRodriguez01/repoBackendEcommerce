@@ -23,7 +23,7 @@ public class DetalleProducto extends Base {
     @Builder.Default
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "talles_del_detalle",
+            name = "fk_talle",
             joinColumns = @JoinColumn(name = "id_detalle"),
             inverseJoinColumns =@JoinColumn(name = "id_talle")
     )
@@ -51,3 +51,4 @@ public class DetalleProducto extends Base {
     @JoinColumn(name = "fk_imagen_producto")
     private ImagenProducto imagenProducto;
 }
+
