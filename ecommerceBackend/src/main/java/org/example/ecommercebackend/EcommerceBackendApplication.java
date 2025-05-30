@@ -33,7 +33,6 @@ public class EcommerceBackendApplication {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-            // Categorías
             Categoria training = Categoria.builder()
                     .nombre("training")
                     .categoriaPadre(null)
@@ -162,7 +161,9 @@ public class EcommerceBackendApplication {
             running.addProducto(prod4);
             running.addProducto(prod6);
             categoriaRepository.save(running);
+
         };
     }
+
 
 }

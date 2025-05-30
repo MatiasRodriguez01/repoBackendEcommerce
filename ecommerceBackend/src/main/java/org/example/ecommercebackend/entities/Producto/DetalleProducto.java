@@ -1,24 +1,29 @@
 package org.example.ecommercebackend.entities.Producto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.sun.jdi.BooleanType;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
-import jdk.jfr.BooleanFlag;
 import lombok.*;
 import org.example.ecommercebackend.entities.Base;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "detalle_producto")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 public class DetalleProducto extends Base {
+
 
     @Builder.Default
     @ManyToMany(cascade = CascadeType.MERGE)
@@ -40,7 +45,6 @@ public class DetalleProducto extends Base {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    @JsonBackReference("producto-detalle")
     private Producto producto;
 
     @OneToOne
@@ -50,5 +54,6 @@ public class DetalleProducto extends Base {
     @OneToOne
     @JoinColumn(name = "fk_imagen_producto")
     private ImagenProducto imagenProducto;
+
 }
 

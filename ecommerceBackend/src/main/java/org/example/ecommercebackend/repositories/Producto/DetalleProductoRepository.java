@@ -207,6 +207,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     @Query(value = """
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
+<<<<<<< HEAD
             inner join categorias c on c.id = ps.fk_categoria
         where ps.seccion = :seccion and c.nombre = :categoria and ps.nombre like concat('%', :buscador, '%');
     """, nativeQuery = true)
@@ -217,6 +218,8 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     @Query(value = """
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
+=======
+>>>>>>> origin/master
             	inner join categorias c on c.id = ps.fk_categoria
             	inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
@@ -252,6 +255,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     @Query(value = """
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
+<<<<<<< HEAD
             inner join categorias c on c.id = ps.fk_categoria
         where ps.seccion = :seccion and c.nombre = :categoria and ps.tipo_producto = :tipo and ps.nombre like concat('%', :buscador, '%');
     """, nativeQuery = true)
@@ -263,6 +267,8 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
     @Query(value = """
         select dt.* from productos ps
         	inner join detalle_producto dt on dt.producto_id = ps.id
+=======
+>>>>>>> origin/master
             	inner join categorias c on c.id = ps.fk_categoria
         	inner join precios p on p.id = dt.fk_precio
         where ps.seccion = :seccion and c.nombre = :categoria
@@ -391,6 +397,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join precios p on p.id = dt.fk_precio
             	inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
+<<<<<<< HEAD
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle
             order by p.precio_venta asc;
             """, nativeQuery = true)
@@ -436,6 +443,8 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             	inner join precios p on p.id = dt.fk_precio
             	inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
+=======
+>>>>>>> origin/master
             where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo;
             """, nativeQuery = true)
     List<DetalleProducto> ordenarDetalleSinOrden(@Param("seccion") String seccion,
@@ -450,7 +459,11 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
             inner join precios p on p.id = dt.fk_precio
             inner join fk_talle ft on ft.id_detalle = dt.id
         	inner join talles t on t.id = ft.id_talle
+<<<<<<< HEAD
         where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo and ps.nombre like concat('%', :buscador, '%')
+=======
+        where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo
+>>>>>>> origin/master
         order by p.precio_venta asc;
             """, nativeQuery = true)
     List<DetalleProducto> filtrarDetalleProductoAscendiente(@Param("seccion") String seccion,
@@ -466,7 +479,11 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
         inner join precios p on p.id = dt.fk_precio
         inner join fk_talle ft on ft.id_detalle = dt.id
         inner join talles t on t.id = ft.id_talle
+<<<<<<< HEAD
     where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo and ps.nombre like concat('%', :buscador, '%')
+=======
+    where ps.seccion = :seccion and c.nombre = :categoria  and t.talle = :talle and ps.tipo_producto = :tipo
+>>>>>>> origin/master
     order by p.precio_venta desc;
             """, nativeQuery = true)
     List<DetalleProducto> filtrarDetalleProductoDescendiente(@Param("seccion") String seccion,
