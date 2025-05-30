@@ -30,6 +30,7 @@ public class BaseController<E extends Base, ID extends Serializable> {
 
     @PostMapping
     public ResponseEntity<E> crear(@RequestBody E entity) throws Exception {
+        System.out.println("Producto recibido: " + entity);
         E entidadCreada = baseService.crear(entity);
         return ResponseEntity.ok(entidadCreada);
     }
