@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.ecommercebackend.entities.Usuario.Rol;
 import org.example.ecommercebackend.entities.Usuario.Usuario;
 import org.example.ecommercebackend.repositories.Usuario.UsuarioRepository;
-import org.example.ecommercebackend.springsecurity.User.User;
-import org.example.ecommercebackend.springsecurity.User.UserRepository;
+
 import org.example.ecommercebackend.springsecurity.jwt.JwtService;
 
 import org.springframework.security.authentication.AuthenticationManager;

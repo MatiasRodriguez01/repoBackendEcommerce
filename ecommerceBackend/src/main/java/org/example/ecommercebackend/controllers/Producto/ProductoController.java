@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/producto")
 public class ProductoController extends BaseController<Producto, Long> {
@@ -23,7 +23,12 @@ public class ProductoController extends BaseController<Producto, Long> {
         super(productoService);
     }
 
-
+    @PostMapping("/crear")
+    public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) throws Exception {
+        System.out.println("Producto recibido: " + producto);
+        Producto creado = productoService.crear(producto);
+        return ResponseEntity.ok(creado);
+    }
 
     // CATEGORIA
     @PutMapping("/{productoId}/asociar-categoria")

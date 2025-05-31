@@ -23,6 +23,11 @@ public class ProductoService extends BaseService<Producto, Long> {
         super(productoRepository);
     }
 
+    public Producto crear(Producto producto) {
+        // Aquí podés agregar lógica adicional si necesitás
+        return productoRepository.save(producto);
+    }
+
     // ----------------------- METODOS PARA LAS CONSULTAS DE LA BD -------------------------
     @Transactional(rollbackFor = Exception.class)
     public List<DetalleProducto> filtarDetalleProducto(Long id, String seccion,
