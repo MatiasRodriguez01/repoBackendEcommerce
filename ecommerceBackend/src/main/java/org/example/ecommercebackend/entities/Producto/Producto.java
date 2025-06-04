@@ -1,7 +1,6 @@
 package org.example.ecommercebackend.entities.Producto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +15,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "productos")
 @JsonIdentityInfo(
@@ -27,7 +27,6 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-//@Audited preguntar si hacer auditoria
 public class Producto extends Base {
 
     @Column(name = "nombre")
@@ -35,6 +34,7 @@ public class Producto extends Base {
 
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
+    @JsonIgnoreProperties("productos")
     private Categoria categoria;
 
     @Column(name = "seccion")
@@ -46,13 +46,9 @@ public class Producto extends Base {
     private TipoProducto tipoProducto;
 
     @Builder.Default
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "detalles_de_producto",
-            joinColumns = @JoinColumn(name = "id_producto"),
-            inverseJoinColumns =@JoinColumn(name = "id_detalle")
-    )
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
+
 
     public void addDetalleProducto(DetalleProducto detalleProducto) {
         detallesProductos.add(detalleProducto);

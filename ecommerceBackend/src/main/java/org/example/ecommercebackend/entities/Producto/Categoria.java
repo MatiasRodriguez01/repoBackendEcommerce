@@ -1,4 +1,5 @@
 package org.example.ecommercebackend.entities.Producto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,10 +17,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "categorias")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -37,6 +34,7 @@ public class Categoria extends Base {
 
     @Builder.Default
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JsonIgnoreProperties("categoria")
     private List<Producto> productos = new ArrayList<>();
 
     public void addProducto(Producto producto) {

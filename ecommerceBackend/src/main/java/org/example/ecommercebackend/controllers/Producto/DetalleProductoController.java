@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/detalleProducto")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DetalleProductoController extends BaseController<DetalleProducto, Long> {
 
     private final DetalleProductoService detalleProductoService;

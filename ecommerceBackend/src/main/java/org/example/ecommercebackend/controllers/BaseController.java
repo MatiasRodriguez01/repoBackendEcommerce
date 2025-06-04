@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:5173")
 public class BaseController<E extends Base, ID extends Serializable> {
     protected BaseService<E, ID> baseService;
 

@@ -7,7 +7,6 @@ import org.example.ecommercebackend.services.Producto.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaController extends BaseController<Categoria, Long> {

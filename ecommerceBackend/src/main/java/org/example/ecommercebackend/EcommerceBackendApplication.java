@@ -107,9 +107,15 @@ public class EcommerceBackendApplication {
 //            det1.getTallesDetalleProductos().add(talle41);
 //            detalleProductoRepository.save(det1);
 //
-//            Producto prod1 = Producto.builder().nombre("Zapatilla Training 1").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.MASCULINO).categoria(training).build();
+//            Producto prod1 = Producto.builder()
+//                    .nombre("Zapatilla Training 1")
+//                    .tipoProducto(TipoProducto.ZAPATILLA)
+//                    .seccion(Seccion.MASCULINO)
+//                    .categoria(training)
+//                    .build();
 //            prod1.addDetalleProducto(det1);
 //            productoRepository.save(prod1);
+//
 //
 //            DetalleProducto det2 = DetalleProducto.builder().stock(4).color("azul").estado(true).precio(precio2).imagenProducto(img2).build();
 //            det2.getTallesDetalleProductos().add(talle39);
@@ -119,6 +125,7 @@ public class EcommerceBackendApplication {
 //            prod2.addDetalleProducto(det2);
 //            productoRepository.save(prod2);
 //
+//
 //            DetalleProducto det3 = DetalleProducto.builder().stock(6).color("negro").estado(true).precio(precio3).imagenProducto(img3).build();
 //            det3.getTallesDetalleProductos().add(talle41);
 //            detalleProductoRepository.save(det3);
@@ -126,6 +133,7 @@ public class EcommerceBackendApplication {
 //            Producto prod3 = Producto.builder().nombre("Zapatilla Training 3").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.MASCULINO).categoria(training).build();
 //            prod3.addDetalleProducto(det3);
 //            productoRepository.save(prod3);
+//
 //
 //            DetalleProducto det4 = DetalleProducto.builder().stock(7).color("verde").estado(true).precio(precio4).imagenProducto(img4).build();
 //            det4.getTallesDetalleProductos().add(talleXXL);
@@ -135,6 +143,7 @@ public class EcommerceBackendApplication {
 //            prod4.addDetalleProducto(det4);
 //            productoRepository.save(prod4);
 //
+//
 //            DetalleProducto det5 = DetalleProducto.builder().stock(8).color("blanco").estado(true).precio(precio5).imagenProducto(img5).build();
 //            det5.getTallesDetalleProductos().add(talleM);
 //            detalleProductoRepository.save(det5);
@@ -143,6 +152,7 @@ public class EcommerceBackendApplication {
 //            prod5.addDetalleProducto(det5);
 //            productoRepository.save(prod5);
 //
+//
 //            DetalleProducto det6 = DetalleProducto.builder().stock(9).color("gris").estado(true).precio(precio6).imagenProducto(img6).build();
 //            det6.getTallesDetalleProductos().add(talleXXL);
 //            detalleProductoRepository.save(det6);
@@ -150,6 +160,7 @@ public class EcommerceBackendApplication {
 //            Producto prod6 = Producto.builder().nombre("Remera Running 6").tipoProducto(TipoProducto.ROPA).seccion(Seccion.FEMENINO).categoria(running).build();
 //            prod6.addDetalleProducto(det6);
 //            productoRepository.save(prod6);
+//
 //
 //            // Asignar productos a categorías
 //            training.addProducto(prod1);

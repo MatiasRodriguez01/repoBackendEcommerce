@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.ecommercebackend.entities.Usuario.Rol;
 import org.example.ecommercebackend.entities.Usuario.Usuario;
 import org.example.ecommercebackend.repositories.Usuario.UsuarioRepository;
-import org.example.ecommercebackend.springsecurity.User.User;
-import org.example.ecommercebackend.springsecurity.User.UserRepository;
 import org.example.ecommercebackend.springsecurity.jwt.JwtService;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,6 +42,21 @@ public class AuthService {
         usuarioRepository.save(user);
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
+                .build();
+    }
+
+    public AuthResponse registerAdmin(RegisterRequest request) {
+        Usuario admin = Usuario.builder()
+                .nombre(request.getNombre())
+                .contraseña(passwordEncoder.encode(request.getContraseña()))
+                .rol(Rol.ADMIN)
+                .email(request.getEmail())
+                .dni(request.getDni())
+                .build();
+
+        usuarioRepository.save(admin);
+        return AuthResponse.builder()
+                .token(jwtService.getToken(admin))
                 .build();
     }
 }
