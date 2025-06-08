@@ -1,5 +1,6 @@
 package org.example.ecommercebackend.controllers.Producto;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.ecommercebackend.controllers.BaseController;
 import org.example.ecommercebackend.entities.Producto.Categoria;
 import org.example.ecommercebackend.entities.Producto.DetalleProducto;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/producto")
 public class ProductoController extends BaseController<Producto, Long> {
@@ -25,7 +26,15 @@ public class ProductoController extends BaseController<Producto, Long> {
 
     @PostMapping("/crear")
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) throws Exception {
-        System.out.println("Producto recibido: " + producto);
+        // Imprimimos el JSON “crudo” que Jackson mapea a Producto
+        System.out.println(">>> Request completo (antes de bind): " + new ObjectMapper().writeValueAsString(producto));
+
+        // Luego, imprimimos cada atributo por separado:
+        System.out.println("    nombre      = " + producto.getNombre());
+        System.out.println("    tipoProducto= " + producto.getTipoProducto());
+        System.out.println("    seccion     = " + producto.getSeccion());
+        System.out.println("    categoriaID = " + (producto.getCategoria() != null ? producto.getCategoria().getId() : "null"));
+        System.out.println("    #detalles   = " + (producto.getDetallesProductos() != null ? producto.getDetallesProductos().size() : "null"));
         Producto creado = productoService.crear(producto);
         return ResponseEntity.ok(creado);
     }

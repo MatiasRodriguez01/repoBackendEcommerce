@@ -2,22 +2,25 @@ package org.example.ecommercebackend.controllers.Producto;
 
 import org.example.ecommercebackend.controllers.BaseController;
 import org.example.ecommercebackend.entities.Producto.*;
+import org.example.ecommercebackend.repositories.Producto.DetalleProductoRepository;
 import org.example.ecommercebackend.services.Producto.DetalleProductoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/detalleProducto")
 public class DetalleProductoController extends BaseController<DetalleProducto, Long> {
 
     private final DetalleProductoService detalleProductoService;
+    private final DetalleProductoRepository detalleProductoRepository;
 
-    public DetalleProductoController(DetalleProductoService detalleProductoService) {
+    public DetalleProductoController(DetalleProductoService detalleProductoService, DetalleProductoRepository detalleProductoRepository) {
         super(detalleProductoService);
         this.detalleProductoService = detalleProductoService;
+        this.detalleProductoRepository = detalleProductoRepository;
     }
 
     // ------------------------- Ordenar por tipo de producto -----------------------------------
@@ -231,7 +234,7 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
     }
 
     // ======================= TALLESDETALLEPRODUCTOS ==================================
-    @PutMapping("/{detalleID}/agregarTalle")
+    @PutMapping("/{detalleId}/agregarTalle")
     public ResponseEntity<?> agregarTalle(@PathVariable Long detalleId, @RequestBody Talles talle) {
         try {
             DetalleProducto detalleActualizado = detalleProductoService.agregarTalles(detalleId, talle);
@@ -314,5 +317,18 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    //ELIMINADO LOGICO
+    @PatchMapping("/{detalleId}/eliminadoLogico")
+    public ResponseEntity<?> eliminadoLogico(@PathVariable Long detalleId){
+        DetalleProducto detalle = detalleProductoRepository.findById(detalleId)
+                .orElseThrow(() -> new RuntimeException("Detalle no encontrado"));
+
+        detalle.setEstado(false);
+
+        detalleProductoRepository.save(detalle);
+
+        return ResponseEntity.ok(detalle);
     }
 }

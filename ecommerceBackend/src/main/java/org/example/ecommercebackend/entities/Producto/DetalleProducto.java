@@ -13,10 +13,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "detalle_producto")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -47,11 +43,11 @@ public class DetalleProducto extends Base {
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "fk_precio")
     private Precio precio;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "fk_imagen_producto")
     private ImagenProducto imagenProducto;
 

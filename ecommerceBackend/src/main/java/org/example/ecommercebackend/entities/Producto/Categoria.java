@@ -1,5 +1,5 @@
 package org.example.ecommercebackend.entities.Producto;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Builder;
 import org.example.ecommercebackend.entities.Base;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +34,8 @@ public class Categoria extends Base {
 
     @Builder.Default
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JsonIgnore
+    @JsonBackReference
     private List<Producto> productos = new ArrayList<>();
 
     public void addProducto(Producto producto) {

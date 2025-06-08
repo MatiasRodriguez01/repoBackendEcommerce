@@ -7,7 +7,6 @@ import org.example.ecommercebackend.entities.Producto.Producto;
 import org.example.ecommercebackend.repositories.Producto.ProductoRepository;
 import org.example.ecommercebackend.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +23,9 @@ public class ProductoService extends BaseService<Producto, Long> {
     }
 
     public Producto crear(Producto producto) {
-        // Aquí podés agregar lógica adicional si necesitás
-        return productoRepository.save(producto);
+        Producto productoNuevo = productoRepository.save(producto);
+        productoNuevo.getCategoria().getNombre();
+        return productoNuevo;
     }
 
     // ----------------------- METODOS PARA LAS CONSULTAS DE LA BD -------------------------

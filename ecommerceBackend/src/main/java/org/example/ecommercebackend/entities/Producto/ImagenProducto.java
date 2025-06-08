@@ -14,10 +14,6 @@ import org.example.ecommercebackend.entities.Base;
 
 @Entity
 @Table(name = "imagen_producto")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
