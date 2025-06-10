@@ -31,6 +31,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    //MERCADO PAGO
+    implementation("com.mercadopago:sdk-java:2.4.0")
+
     // Hibernate Envers (para auditoría)
     implementation 'org.hibernate.orm:hibernate-envers:6.6.13.Final'
 

@@ -10,7 +10,9 @@ import lombok.Setter;
 import lombok.Builder;
 import org.example.ecommercebackend.entities.Base;
 import org.example.ecommercebackend.entities.Producto.Descuento;
+import org.example.ecommercebackend.entities.Producto.DetalleProducto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,11 +36,11 @@ public class OrdenCompra extends Base {
     private UsuarioDireccion usuarioDireccion;
 
     @Column(name = "total")
-    private Integer total;
+    private Double total;
 
 
     @Column(name = "fecha_compra")
-    private Date fechaCompra;
+    private LocalDate fechaCompra;
 
 
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -47,4 +49,8 @@ public class OrdenCompra extends Base {
 
     @OneToMany(mappedBy = "ordenCompra", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdenCompraDetalle> detalles = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "orden_compra_id")  // Esto hace que la FK esté en DetalleProducto
+    private List<DetalleProducto> detallesProductos = new ArrayList<>();
 }

@@ -73,12 +73,12 @@ public class EcommerceBackendApplication {
             descuentoRepository.save(desc6);
 
             // Precios
-            Precio precio1 = Precio.builder().precioCompra(50000).precioVenta(60000).descuento(desc1).build();
-            Precio precio2 = Precio.builder().precioCompra(52000).precioVenta(63000).descuento(desc2).build();
-            Precio precio3 = Precio.builder().precioCompra(54000).precioVenta(65000).descuento(desc3).build();
-            Precio precio4 = Precio.builder().precioCompra(30000).precioVenta(40000).descuento(desc4).build();
-            Precio precio5 = Precio.builder().precioCompra(32000).precioVenta(42000).descuento(desc5).build();
-            Precio precio6 = Precio.builder().precioCompra(35000).precioVenta(45000).descuento(desc6).build();
+            Precio precio1 = Precio.builder().precioCompra(50000.0).precioVenta(60000.0).descuento(desc1).build();
+            Precio precio2 = Precio.builder().precioCompra(52000.0).precioVenta(63000.0).descuento(desc2).build();
+            Precio precio3 = Precio.builder().precioCompra(54000.0).precioVenta(65000.0).descuento(desc3).build();
+            Precio precio4 = Precio.builder().precioCompra(30000.0).precioVenta(40000.0).descuento(desc4).build();
+            Precio precio5 = Precio.builder().precioCompra(32000.0).precioVenta(42000.0).descuento(desc5).build();
+            Precio precio6 = Precio.builder().precioCompra(35000.0).precioVenta(45000.0).descuento(desc6).build();
 
             precioRepository.save(precio1);
             precioRepository.save(precio2);

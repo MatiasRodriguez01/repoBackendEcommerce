@@ -18,10 +18,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Precio extends Base {
 
     @Column(name = "precio_compra")
-    private Integer precioCompra;
+    private Double precioCompra;
 
     @Column(name = "precio_venta")
-    private Integer precioVenta;
+    private Double precioVenta;
 
 
     @ManyToOne() //no se si va remove ya que otro precio podria tener el mismo descuento

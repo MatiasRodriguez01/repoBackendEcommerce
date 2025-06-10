@@ -30,11 +30,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .cors(Customizer.withDefaults())  // <-- habilitar CORS acá
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authRequest ->
-                        authRequest
-                                .anyRequest().permitAll()
+                        authRequest.anyRequest().permitAll() // 👉 permite todas las rutas
                 )
+                //.authorizeHttpRequests(authRequest ->
+                       // authRequest
+                                //.requestMatchers("/auth/**").permitAll()
+                                //.anyRequest().authenticated()
                 .sessionManagement(sessionManagement ->
                         sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -42,7 +45,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
