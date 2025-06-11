@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/pay")
 @RequiredArgsConstructor
@@ -65,19 +66,12 @@ public class MercadoPagoController {
         List<PreferencePaymentTypeRequest> excludedPaymentTypes = new ArrayList<>();
         excludedPaymentTypes.add(PreferencePaymentTypeRequest.builder().id("ticket").build());
 
-        /*
-         *Otros ejemplos de id que podrías excluir:
-         * "credit_card": tarjetas de crédito
-         * "debit_card": tarjetas de débito
-         * "ticket": pagos en efectivo como Rapipago o Pago Fácil
-         * "atm": pagos a través de cajero automático
-         */
 
         PreferencePaymentMethodsRequest paymentMethods = PreferencePaymentMethodsRequest.builder()
                 .excludedPaymentTypes(excludedPaymentTypes)
                 .installments(1)
                 .build();
-        //el campo installments(1) se refiere a la cantidad máxima de cuotas permitidas para realizar el pago
+
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)

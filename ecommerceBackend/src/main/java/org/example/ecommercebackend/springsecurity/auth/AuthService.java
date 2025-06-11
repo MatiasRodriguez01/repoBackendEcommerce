@@ -31,6 +31,21 @@ public class AuthService {
                 .build();
     }
 
+    public AuthResponse registerAdmin(RegisterRequest request) {
+        Usuario admin = Usuario.builder()
+                .nombre(request.getNombre())
+                .contraseña(passwordEncoder.encode(request.getContraseña()))
+                .rol(Rol.ADMIN)
+                .email(request.getEmail())
+                .dni(request.getDni())
+                .build();
+
+        usuarioRepository.save(admin);
+        return AuthResponse.builder()
+                .token(jwtService.getToken(admin))
+                .build();
+    }
+
     public AuthResponse register(RegisterRequest request) {
         Usuario user = Usuario.builder()
                 .nombre(request.getNombre())

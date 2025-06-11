@@ -22,7 +22,7 @@ public class DetalleProducto extends Base {
 
 
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany()
     @JoinTable(
             name = "fk_talle",
             joinColumns = @JoinColumn(name = "id_detalle"),
@@ -41,6 +41,7 @@ public class DetalleProducto extends Base {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
+    @JsonIgnoreProperties("detallesProductos")
     private Producto producto;
 
     @ManyToOne

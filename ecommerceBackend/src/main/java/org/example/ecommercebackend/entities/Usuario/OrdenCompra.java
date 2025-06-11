@@ -47,10 +47,10 @@ public class OrdenCompra extends Base {
     @JoinColumn(name = "fk_descuento")
     private Descuento descuento;
 
+    @Builder.Default
     @OneToMany(mappedBy = "ordenCompra", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdenCompraDetalle> detalles = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "orden_compra_id")  // Esto hace que la FK esté en DetalleProducto
+    @OneToMany()
     private List<DetalleProducto> detallesProductos = new ArrayList<>();
 }

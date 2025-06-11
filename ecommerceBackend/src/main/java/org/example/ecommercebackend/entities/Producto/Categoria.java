@@ -34,8 +34,7 @@ public class Categoria extends Base {
 
     @Builder.Default
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.MERGE, orphanRemoval = true)
-    @JsonIgnore
-    @JsonBackReference
+    @JsonIgnoreProperties("categoria")
     private List<Producto> productos = new ArrayList<>();
 
     public void addProducto(Producto producto) {

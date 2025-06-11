@@ -631,11 +631,12 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
             DetalleProducto detalle = detalleProductoRepository.findById(detalleId)
                     .orElseThrow(() -> new Exception("DetalleProducto no encontrado con id: " + detalleId));
 
+            detalle.getTallesDetalleProductos()
+                    .removeIf(talle -> talle.getId().equals(talleDelete.getId()));
 
-            detalle.getTallesDetalleProductos().removeIf(talle -> talle.getId() == talleDelete.getId());
             return detalleProductoRepository.save(detalle);
         } catch (Exception ex) {
-            throw new Exception("Ocurrio un error en el servicio (sacarTalles): " + ex.getMessage());
+            throw new Exception("Ocurrió un error en el servicio (sacarTalles): " + ex.getMessage());
         }
     }
 

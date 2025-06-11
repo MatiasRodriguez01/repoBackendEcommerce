@@ -33,6 +33,7 @@ public class Producto extends Base {
 
     @ManyToOne()
     @JoinColumn(name = "fk_categoria")
+    @JsonIgnoreProperties("productos")
     private Categoria categoria;
 
     @Column(name = "seccion")

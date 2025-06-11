@@ -32,12 +32,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authRequest ->
-                        authRequest.anyRequest().permitAll() // 👉 permite todas las rutas
+                        authRequest
+                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/detalleProducto/**").permitAll()
+                                .requestMatchers("/pay/**").permitAll()// solo permite acceso libre a /auth/**
+                                .anyRequest().authenticated() // las demás requieren JWT
                 )
-                //.authorizeHttpRequests(authRequest ->
-                       // authRequest
-                                //.requestMatchers("/auth/**").permitAll()
-                                //.anyRequest().authenticated()
                 .sessionManagement(sessionManagement ->
                         sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();

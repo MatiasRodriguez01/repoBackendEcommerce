@@ -23,6 +23,14 @@ public class Talles extends Base {
     @Column(name = "talle")
     private String talle;
 
+    @Override
+    public String toString() {
+        return "Talles{" +
+                "id=" + id +
+                ", nombre='" + talle + '\'' +
+                '}';
+    }
+
 //    @Builder.Default
 //    @OneToMany(mappedBy = "talledetalleProductos",cascade = CascadeType.ALL, orphanRemoval = true)
 //    //@JoinColumn(name = "fk_detalles_productos")

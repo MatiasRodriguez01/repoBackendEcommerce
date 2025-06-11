@@ -236,6 +236,7 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
     // ======================= TALLESDETALLEPRODUCTOS ==================================
     @PutMapping("/{detalleId}/agregarTalle")
     public ResponseEntity<?> agregarTalle(@PathVariable Long detalleId, @RequestBody Talles talle) {
+        System.out.println("Talle recibido: " + talle);
         try {
             DetalleProducto detalleActualizado = detalleProductoService.agregarTalles(detalleId, talle);
             return ResponseEntity.ok(detalleActualizado);
