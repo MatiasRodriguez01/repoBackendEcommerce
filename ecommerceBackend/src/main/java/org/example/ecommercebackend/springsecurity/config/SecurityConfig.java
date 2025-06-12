@@ -33,6 +33,10 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authRequest ->
                         authRequest
+                                .requestMatchers("/**").permitAll() // permitir todo temporalmente
+                )
+                .authorizeHttpRequests(authRequest ->
+                        authRequest
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/detalleProducto/**").permitAll()
                                 .requestMatchers("/pay/**").permitAll()// solo permite acceso libre a /auth/**

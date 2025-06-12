@@ -5,6 +5,7 @@ import org.example.ecommercebackend.controllers.BaseController;
 import org.example.ecommercebackend.entities.Producto.Categoria;
 import org.example.ecommercebackend.entities.Producto.DetalleProducto;
 import org.example.ecommercebackend.entities.Producto.Producto;
+import org.example.ecommercebackend.repositories.Producto.ProductoRepository;
 import org.example.ecommercebackend.services.Producto.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,13 @@ public class ProductoController extends BaseController<Producto, Long> {
     @Autowired
     private ProductoService productoService;
 
-    public ProductoController(ProductoService productoService) {
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    public ProductoController(ProductoService productoService, ProductoRepository productoRepository) {
         super(productoService);
+        this.productoService = productoService;
+        this.productoRepository = productoRepository;
     }
 
     @PostMapping("/crear")
@@ -59,6 +65,34 @@ public class ProductoController extends BaseController<Producto, Long> {
     @PutMapping("/{productoId}/eliminar-detalle")
     public Producto eliminarDetalle(@PathVariable Long productoId, @RequestBody DetalleProducto detalle) throws Exception {
         return productoService.sacarDetalleProducto(productoId, detalle);
+    }
+
+    //Inactivar producto
+    @PatchMapping("/{productoId}/inactivarProducto")
+    public ResponseEntity<?> inactivarProducto(@PathVariable Long productoId){
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        producto.setEstado(false);
+
+        productoRepository.save(producto);
+
+        return ResponseEntity.ok(producto);
+    }
+
+    //Activar producto
+    @PatchMapping("/{productoId}/activarProducto")
+    public ResponseEntity<?> activarProducto(@PathVariable Long productoId){
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        producto.setEstado(true);
+        System.out.println("Antes de guardar, estado = " + producto.getEstado()); // esto debería mostrar "true"
+        productoRepository.save(producto);
+        System.out.println("Después de guardar, estado = " + productoRepository.findById(productoId).get().getEstado());
+
+
+        return ResponseEntity.ok(producto);
     }
 }
 

@@ -15,10 +15,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "descuentos")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

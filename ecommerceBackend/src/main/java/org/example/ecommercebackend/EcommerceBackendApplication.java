@@ -115,7 +115,7 @@ public class EcommerceBackendApplication {
             det2.getTallesDetalleProductos().add(talle39);
             detalleProductoRepository.save(det2);
 
-            Producto prod2 = Producto.builder().nombre("Zapatilla Running 2").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.FEMENINO).categoria(running).build();
+            Producto prod2 = Producto.builder().nombre("Zapatilla Running 2").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.FEMENINO).estado(true).categoria(running).build();
             prod2.addDetalleProducto(det2);
             productoRepository.save(prod2);
 
@@ -123,7 +123,7 @@ public class EcommerceBackendApplication {
             det3.getTallesDetalleProductos().add(talle41);
             detalleProductoRepository.save(det3);
 
-            Producto prod3 = Producto.builder().nombre("Zapatilla Training 3").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.MASCULINO).categoria(training).build();
+            Producto prod3 = Producto.builder().nombre("Zapatilla Training 3").tipoProducto(TipoProducto.ZAPATILLA).seccion(Seccion.MASCULINO).estado(true).categoria(training).build();
             prod3.addDetalleProducto(det3);
             productoRepository.save(prod3);
 
@@ -131,7 +131,7 @@ public class EcommerceBackendApplication {
             det4.getTallesDetalleProductos().add(talleXXL);
             detalleProductoRepository.save(det4);
 
-            Producto prod4 = Producto.builder().nombre("Remera Running 4").tipoProducto(TipoProducto.ROPA).seccion(Seccion.FEMENINO).categoria(running).build();
+            Producto prod4 = Producto.builder().nombre("Remera Running 4").tipoProducto(TipoProducto.ROPA).seccion(Seccion.FEMENINO).estado(true).categoria(running).build();
             prod4.addDetalleProducto(det4);
             productoRepository.save(prod4);
 
@@ -139,7 +139,7 @@ public class EcommerceBackendApplication {
             det5.getTallesDetalleProductos().add(talleM);
             detalleProductoRepository.save(det5);
 
-            Producto prod5 = Producto.builder().nombre("Camiseta Training 5").tipoProducto(TipoProducto.ROPA).seccion(Seccion.MASCULINO).categoria(training).build();
+            Producto prod5 = Producto.builder().nombre("Camiseta Training 5").tipoProducto(TipoProducto.ROPA).seccion(Seccion.MASCULINO).estado(true).categoria(training).build();
             prod5.addDetalleProducto(det5);
             productoRepository.save(prod5);
 
@@ -147,7 +147,7 @@ public class EcommerceBackendApplication {
             det6.getTallesDetalleProductos().add(talleXXL);
             detalleProductoRepository.save(det6);
 
-            Producto prod6 = Producto.builder().nombre("Remera Running 6").tipoProducto(TipoProducto.ROPA).seccion(Seccion.FEMENINO).categoria(running).build();
+            Producto prod6 = Producto.builder().nombre("Remera Running 6").tipoProducto(TipoProducto.ROPA).seccion(Seccion.FEMENINO).estado(true).categoria(running).build();
             prod6.addDetalleProducto(det6);
             productoRepository.save(prod6);
 

@@ -13,10 +13,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "categorias")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

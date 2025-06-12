@@ -21,10 +21,6 @@ import java.util.List;
 @Table(name = "usuarios", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"nombre"})
 })
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -15,10 +15,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "productos")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -39,6 +35,9 @@ public class Producto extends Base {
     @Column(name = "seccion")
     @Enumerated(EnumType.STRING)
     private Seccion seccion;
+
+    @Column(name = "estado")
+    private Boolean estado;
 
     @Column(name = "tipo_producto")
     @Enumerated(EnumType.STRING)

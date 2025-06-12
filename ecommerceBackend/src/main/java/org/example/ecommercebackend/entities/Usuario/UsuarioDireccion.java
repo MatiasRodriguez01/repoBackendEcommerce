@@ -14,10 +14,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuario_direccion")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

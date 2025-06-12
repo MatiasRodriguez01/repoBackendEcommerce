@@ -19,10 +19,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "orden_compra")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

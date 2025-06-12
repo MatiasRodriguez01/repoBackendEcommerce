@@ -4,6 +4,7 @@ import org.example.ecommercebackend.controllers.BaseController;
 import org.example.ecommercebackend.entities.Producto.*;
 import org.example.ecommercebackend.repositories.Producto.DetalleProductoRepository;
 import org.example.ecommercebackend.services.Producto.DetalleProductoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,214 +25,32 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
     }
 
     // ------------------------- Ordenar por tipo de producto -----------------------------------
+
     @GetMapping("/filter")
-    public ResponseEntity<?> filtrarDetalleProducto(@RequestParam(required = false) String seccion,
-                                                    @RequestParam(required = false) String categoria,
-                                                    @RequestParam(required = false) String talle,
-                                                    @RequestParam(required = false) String tipo,
-                                                    @RequestParam(required = false) String orden,
-                                                    @RequestParam(required = false) String buscador) {
+    public ResponseEntity<?> filtrarDetalleProducto(@RequestParam String seccion,
+                                                     @RequestParam String categoria,
+                                                     @RequestParam String talle,
+                                                     @RequestParam String tipo,
+                                                     @RequestParam String orden,
+                                                     @RequestParam String buscador,
+                                                     @RequestParam Integer precioMaximo){
+        try{
 
-        try {
-            if (seccion.equals("") && categoria.equals("")){
-                if ((tipo == "") && (orden == "") && (buscador == "")){
-                    String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordernarDetallesPorTalleDeProductoCatalogoCompleto(talleFormat);
-                    return ResponseEntity.ok(lista);
-                }
-                if ((tipo == "") && (orden == "")){
-                    String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordernarDetallesPorTalleDeProductoCatalogoCompletoBuscador(talleFormat, buscador);
-                    return ResponseEntity.ok(lista);
-                }
-                if ((talle == "") && (orden == "") && (buscador == "")) {
-                    String tipoUpper = tipo.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService. ordenarDetallesPorTipodeproductoCatalogoCompleto(tipoUpper);
-                    return ResponseEntity.ok(lista);
-                }
-                if((talle == "" ) && (orden == "")){
-                    String tipoUpper = tipo.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService. ordenarDetallesPorTipodeproductoCatalogoCompletoBuscador(tipoUpper, buscador);
-                    return ResponseEntity.ok(lista);
-                }
-                if ((talle == "") && (tipo == "") && (buscador == "")) {
-                    String ordenToLower = orden.toLowerCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetallePorPrecioCatalogoCompleto(ordenToLower);
-                    return ResponseEntity.ok(lista);
-                }
-
-                if((talle == "") && (tipo == "")){
-                    String ordenToLower = orden.toLowerCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetallePorPrecioCatalogoCompletoBuscador(ordenToLower, buscador);
-                    return ResponseEntity.ok(lista);
-                }
-                if ((talle == "") && (orden == "") && (tipo == "")){
-                    List<DetalleProducto> lista = detalleProductoService.filtrarDetallesPorBusquedaCatalogoCompleto(buscador);
-                    return ResponseEntity.ok(lista);
-                }
-                if ((talle == "") && (buscador == "")) {
-                    String ordenToLower = orden.toLowerCase();
-                    String tipoUpper = tipo.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTalleCatalogoCompleto(tipoUpper, ordenToLower);
-                    return ResponseEntity.ok(lista);
-                }
-
-                if ((talle == "")) {
-                    String ordenToLower = orden.toLowerCase();
-                    String tipoUpper = tipo.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTalleCatalogoCompletoBuscador(tipoUpper, ordenToLower, buscador);
-                    return ResponseEntity.ok(lista);
-                }
-
-                if ((tipo == "") && (buscador == "")){
-                    String ordenToLower = orden.toLowerCase();
-                    String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTipoCatalogoCompleto(talleFormat, ordenToLower);
-                    return ResponseEntity.ok(lista);
-                }
-
-                if ((tipo == "")){
-                    String ordenToLower = orden.toLowerCase();
-                    String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTipoCatalogoCompletoBuscador(talleFormat, ordenToLower, buscador);
-                    return ResponseEntity.ok(lista);
-                }
-                if ((orden == "") && (buscador == "")){
-                    String tipoUpper = tipo.toUpperCase();
-                    String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinOrdenCatalogoCompleto(talleFormat, tipoUpper);
-                    return ResponseEntity.ok(lista);
-                }
-                if ((orden == "")){
-                    String tipoUpper = tipo.toUpperCase();
-                    String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                    List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinOrdenCatalogoCompletoBuscador(talleFormat, tipoUpper, buscador);
-                    return ResponseEntity.ok(lista);
-                }
-                String seccionUpper = seccion.toUpperCase();
-                String tipoUpper = tipo.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String ordenToLower = orden.toLowerCase();
-                String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                List<DetalleProducto> lista = detalleProductoService.filtarDetalleProducto(seccionUpper, categoriaLower, talleFormat, tipoUpper, ordenToLower, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (tipo == "") && (orden == "") && (buscador == "")) {
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetallesPorProducto(seccionUpper, categoriaLower);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (tipo == "") && (orden == "")) {
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetallesPorProductoBuscador(seccionUpper, categoriaLower, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            if ((tipo == "") && (orden == "") && (buscador == "")){
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                List<DetalleProducto> lista = detalleProductoService.ordernarDetallesPorTalleDeProducto(seccionUpper, categoriaLower, talleFormat);
-                return ResponseEntity.ok(lista);
-            }
-            if ((tipo == "") && (orden == "")){
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                List<DetalleProducto> lista = detalleProductoService.ordernarDetallesPorTalleDeProductoBuscador(seccionUpper, categoriaLower, talleFormat, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (orden == "") && (buscador == "")) {
-                String tipoUpper = tipo.toUpperCase();
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetallePorTipodeproducto(seccionUpper, categoriaLower, tipoUpper);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (orden == "")) {
-                String tipoUpper = tipo.toUpperCase();
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetallePorTipodeproductoBuscador(seccionUpper, categoriaLower, tipoUpper, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (tipo == "") && (buscador == "")) {
-                String seccionUpper = seccion.toUpperCase();
-                String ordenToLower = orden.toLowerCase();
-                String categoriaLower = categoria.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetallePorPrecio(seccionUpper, categoriaLower, ordenToLower);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (tipo == "")) {
-                String seccionUpper = seccion.toUpperCase();
-                String ordenToLower = orden.toLowerCase();
-                String categoriaLower = categoria.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetallePorPrecioBuscador(seccionUpper, categoriaLower, ordenToLower, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (buscador == "")){
-                String seccionUpper = seccion.toUpperCase();
-                String tipoUpper = tipo.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String ordenToLower = orden.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTalle(seccionUpper, categoriaLower, tipoUpper, ordenToLower);
-                return ResponseEntity.ok(lista);
-            }
-            if ((talle == "") && (buscador == "")){
-                String seccionUpper = seccion.toUpperCase();
-                String tipoUpper = tipo.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String ordenToLower = orden.toLowerCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTalleBuscador(seccionUpper, categoriaLower, tipoUpper, ordenToLower, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            if ((tipo == "") && (buscador == "")){
-                String ordenToLower = orden.toLowerCase();
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTipo(seccionUpper, categoriaLower, talleFormat, ordenToLower);
-                return ResponseEntity.ok(lista);
-            }
-            if ((tipo == "")){
-                String ordenToLower = orden.toLowerCase();
-                String seccionUpper = seccion.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinTipoBuscador(seccionUpper, categoriaLower, talleFormat, ordenToLower, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            if ((orden == "") && (buscador == "")){
-                String seccionUpper = seccion.toUpperCase();
-                String tipoUpper = tipo.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinOrden(seccionUpper, categoriaLower, talleFormat, tipoUpper);
-                return ResponseEntity.ok(lista);
-            }
-            if ((orden == "")){
-                String seccionUpper = seccion.toUpperCase();
-                String tipoUpper = tipo.toUpperCase();
-                String categoriaLower = categoria.toLowerCase();
-                String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-
-                List<DetalleProducto> lista = detalleProductoService.ordenarDetalleSinOrdenBuscador(seccionUpper, categoriaLower, talleFormat, tipoUpper, buscador);
-                return ResponseEntity.ok(lista);
-            }
-            String seccionUpper = seccion.toUpperCase();
-            String tipoUpper = tipo.toUpperCase();
-            String categoriaLower = categoria.toLowerCase();
-            String ordenToLower = orden.toLowerCase();
-            String talleFormat = talle.matches("\\d+") ? talle : talle.toUpperCase();
-            List<DetalleProducto> lista = detalleProductoService.filtarDetalleProducto(seccionUpper, categoriaLower, talleFormat, tipoUpper, ordenToLower, buscador);
-            return ResponseEntity.ok(lista);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            seccion = seccion.toUpperCase();
+            categoria = categoria.toLowerCase();
+            talle = talle.matches("\\d+") ? talle : talle.toUpperCase();
+            tipo = tipo.toUpperCase();
+            orden = orden.toLowerCase();
+            List<DetalleProducto> listaDetalles = detalleProductoService.ordenarDetallesProductos(seccion, categoria, talle, tipo, orden, buscador, precioMaximo);
+            System.out.println("Lista de detalles en el controller: " + listaDetalles);
+            return ResponseEntity.ok(listaDetalles);
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al filtrar productos");
         }
+}
 
-    }
+
 
     // ======================= TALLESDETALLEPRODUCTOS ==================================
     @PutMapping("/{detalleId}/agregarTalle")

@@ -17,10 +17,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "direcciones")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
